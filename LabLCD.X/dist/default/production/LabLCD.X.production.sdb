@@ -3,6 +3,8 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
+"12 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\adclib.c
+[v _initADC initADC `(v  1 e 1 0 ]
 "10 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8_16.c
@@ -11,9 +13,198 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"32 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+"40 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+[v _ISR ISR `II(v  1 e 1 0 ]
+"50
 [v _main main `(v  1 e 1 0 ]
+"20 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LCDISPLIBLB3.c
+[v _lcd_databits lcd_databits `(v  1 e 1 0 ]
+"72
+[v _lcd_char lcd_char `(v  1 e 1 0 ]
+"81
+[v _lcd_stinst5 lcd_stinst5 `(v  1 e 1 0 ]
+"90
+[v _lcd_stinst1 lcd_stinst1 `(v  1 e 1 0 ]
+"100
+[v _lcd_inst lcd_inst `(v  1 e 1 0 ]
+"115
+[v _lcd_start lcd_start `(v  1 e 1 0 ]
+"154
+[v _lcd_cursor_set lcd_cursor_set `(v  1 e 1 0 ]
+"459 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+[s S64 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"553
+[u S72 . 1 `S64 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES72  1 e 1 @12 ]
+"1238
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+"1245
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
+[s S84 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+`uc 1 ADCS 1 0 :2:6 
+]
+"1276
+[s S89 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 ADCS0 1 0 :1:6 
+`uc 1 ADCS1 1 0 :1:7 
+]
+[s S98 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S101 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[u S104 . 1 `S84 1 . 1 0 `S89 1 . 1 0 `S98 1 . 1 0 `S101 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES104  1 e 1 @31 ]
+"1416
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1478
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1602
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+[s S205 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+]
+"1718
+[u S213 . 1 `S205 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES213  1 e 1 @140 ]
+"2977
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+[s S135 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 VCFG0 1 0 :1:4 
+`uc 1 VCFG1 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 ADFM 1 0 :1:7 
+]
+"2991
+[u S141 . 1 `S135 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES141  1 e 1 @159 ]
+"3387
+[v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
+"3449
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"4079
+[v _RA0 RA0 `VEb  1 e 0 @40 ]
+"4082
+[v _RA1 RA1 `VEb  1 e 0 @41 ]
+"4085
+[v _RA2 RA2 `VEb  1 e 0 @42 ]
+"4088
+[v _RA3 RA3 `VEb  1 e 0 @43 ]
+"4091
+[v _RA4 RA4 `VEb  1 e 0 @44 ]
+"4094
+[v _RA5 RA5 `VEb  1 e 0 @45 ]
+"4097
+[v _RA6 RA6 `VEb  1 e 0 @46 ]
+"4100
+[v _RA7 RA7 `VEb  1 e 0 @47 ]
+"4181
+[v _RD0 RD0 `VEb  1 e 0 @64 ]
+"4184
+[v _RD1 RD1 `VEb  1 e 0 @65 ]
+"38 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+[v _potval potval `uc  1 e 1 0 ]
+"50
 [v _main main `(v  1 e 1 0 ]
 {
-"34
+"65
+[v main@contsa contsa `uc  1 a 1 5 ]
+"62
+[v main@potlom potlom `uc  1 a 1 4 ]
+"61
+[v main@pothim pothim `uc  1 a 1 3 ]
+"89
+} 0
+"115 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LCDISPLIBLB3.c
+[v _lcd_start lcd_start `(v  1 e 1 0 ]
+{
+"126
+} 0
+"81
+[v _lcd_stinst5 lcd_stinst5 `(v  1 e 1 0 ]
+{
+[v lcd_stinst5@iord iord `uc  1 a 1 wreg ]
+[v lcd_stinst5@iord iord `uc  1 a 1 wreg ]
+[v lcd_stinst5@iord iord `uc  1 a 1 6 ]
+"88
+} 0
+"90
+[v _lcd_stinst1 lcd_stinst1 `(v  1 e 1 0 ]
+{
+[v lcd_stinst1@iord iord `uc  1 a 1 wreg ]
+[v lcd_stinst1@iord iord `uc  1 a 1 wreg ]
+[v lcd_stinst1@iord iord `uc  1 a 1 5 ]
+"97
+} 0
+"154
+[v _lcd_cursor_set lcd_cursor_set `(v  1 e 1 0 ]
+{
+[v lcd_cursor_set@x x `uc  1 a 1 wreg ]
+"156
+[v lcd_cursor_set@a a `uc  1 a 1 10 ]
+"154
+[v lcd_cursor_set@x x `uc  1 a 1 wreg ]
+[v lcd_cursor_set@y y `uc  1 p 1 7 ]
+"157
+[v lcd_cursor_set@x x `uc  1 a 1 9 ]
+"165
+} 0
+"100
+[v _lcd_inst lcd_inst `(v  1 e 1 0 ]
+{
+[v lcd_inst@iord iord `uc  1 a 1 wreg ]
+[v lcd_inst@iord iord `uc  1 a 1 wreg ]
+[v lcd_inst@iord iord `uc  1 a 1 6 ]
+"107
+} 0
+"72
+[v _lcd_char lcd_char `(v  1 e 1 0 ]
+{
+[v lcd_char@iord iord `uc  1 a 1 wreg ]
+[v lcd_char@iord iord `uc  1 a 1 wreg ]
+[v lcd_char@iord iord `uc  1 a 1 6 ]
+"79
+} 0
+"20
+[v _lcd_databits lcd_databits `(v  1 e 1 0 ]
+{
+[v lcd_databits@data data `uc  1 a 1 wreg ]
+[v lcd_databits@data data `uc  1 a 1 wreg ]
+"22
+[v lcd_databits@data data `uc  1 a 1 3 ]
+"70
+} 0
+"12 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\adclib.c
+[v _initADC initADC `(v  1 e 1 0 ]
+{
+[v initADC@var1 var1 `uc  1 a 1 wreg ]
+[v initADC@var1 var1 `uc  1 a 1 wreg ]
+[v initADC@var1 var1 `uc  1 a 1 5 ]
+"68
+} 0
+"40 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+[v _ISR ISR `II(v  1 e 1 0 ]
+{
+"48
 } 0

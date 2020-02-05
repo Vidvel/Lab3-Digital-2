@@ -1,4 +1,4 @@
-# 1 "LabLCDisp.c"
+# 1 "LCDISPLIBLB3.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,22 +6,10 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "LabLCDisp.c" 2
-# 13 "LabLCDisp.c"
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
+# 1 "LCDISPLIBLB3.c" 2
 
 
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
+
 
 
 
@@ -2511,7 +2499,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 31 "LabLCDisp.c" 2
+# 9 "LCDISPLIBLB3.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
@@ -2646,7 +2634,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 32 "LabLCDisp.c" 2
+# 10 "LCDISPLIBLB3.c" 2
 
 # 1 "./LCDISPLIBLB3.h" 1
 # 11 "./LCDISPLIBLB3.h"
@@ -2662,123 +2650,151 @@ void lcd_inst(char iord);
 void lcd_cursor_set(char x, char y);
 void lcd_writechar(char m);
 void lcd_char(char iord);
-# 33 "LabLCDisp.c" 2
-
-# 1 "./adclib.h" 1
-# 11 "./adclib.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
-# 11 "./adclib.h" 2
-
-void initADC(char var1);
-# 34 "LabLCDisp.c" 2
-
-
-
-
-char potval = 0;
-
-void __attribute__((picinterrupt(("")))) ISR(void){
-    if (PIR1bits.ADIF == 1){
-        PIR1bits.ADIF = 0;
-        potval = ADRESH;
-        ADCON0bits.GO = 1;
+# 11 "LCDISPLIBLB3.c" 2
+# 20 "LCDISPLIBLB3.c"
+void lcd_databits(char data)
+{
+    if(data & 1){
+        RA0 = 1;
     }
-    else
-        __asm("nop");
+ else{
+  RA0 = 0;
+    }
+ if(data & 2){
+        RA1 = 1;
+    }
+ else{
+  RA1 = 0;
+    }
+ if(data & 4){
+  RA2 = 1;
+    }
+ else{
+  RA2 = 0;
+    }
+ if(data & 8){
+  RA3 = 1;
+    }
+ else{
+  RA3 = 0;
+    }
+ if(data & 16){
+        RA4 = 1;
+    }
+ else{
+  RA4 = 0;
+    }
+ if(data & 32){
+        RA5 = 1;
+    }
+ else{
+  RA5 = 0;
+    }
+ if(data & 64){
+  RA6 = 1;
+    }
+ else{
+  RA6 = 0;
+    }
+ if(data & 128){
+  RA7 = 1;
+    }
+ else{
+  RA7 = 0;
+    }
 }
 
-void main(void) {
-    TRISB = 0b100001;
-    ANSEL = 0;
-    ANSELH = 0b0010100;
-    TRISA = 0;
-    TRISD = 0;
-    ADCON1bits.ADFM = 1;
-    ADCON1bits.VCFG0 = 0;
-    ADCON1bits.VCFG1 = 0;
-    ADCON0 = 0b11000001;
-    INTCON = 0b11000000;
-    char pothim;
-    char potlom;
-    char phi;
-    char plo;
-    char contsa = 15;
-    lcd_start();
-    char ancha = 13;
-    initADC(ancha);
-    lcd_cursor_set(1,5);
-    lcd_char('1');
-    lcd_cursor_set(1,10);
-    lcd_char('2');
-    lcd_cursor_set(1,16);
-    lcd_char('3');
-    lcd_cursor_set(2,4);
-    lcd_char('4');
-    lcd_cursor_set(2,9);
-    lcd_char('5');
-    lcd_cursor_set(2,15);
-    lcd_char('6');
-    while(1){
-        pothim = potval;
-        potlom = potval;
-        plo = (potlom & contsa);
-        phi = pothim >> 4;
-        __asm("nop");
-    }
-    return;
+void lcd_char(char iord){
+ RD1 = 1;
+ lcd_databits(iord);
+ RD0 = 1;
+    _delay((unsigned long)((5)*(4000000/4000.0)));
+    RD0 = 0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
 }
 
-char hex_to_lcd (char var1){
-    char out;
-    switch (var1){
-        default:
-            out='-';
-            break;
-        case 1:
-            out = '1';
-            break;
-        case 2:
-            out = '2';
-            break;
-        case 3:
-            out = '3';
-            break;
-        case 4:
-            out = '4';
-            break;
-        case 5:
-            out = '5';
-            break;
-        case 6:
-            out = '6';
-            break;
-        case 7:
-            out = '7';
-            break;
-        case 8:
-            out = '8';
-            break;
-        case 9:
-            out = '9';
-            break;
-        case 10:
-            out = 'A';
-            break;
-        case 11:
-            out = 'B';
-            break;
-        case 12:
-            out = 'C';
-            break;
-        case 13:
-            out = 'D';
-            break;
-        case 14:
-            out = 'E';
-            break;
-        case 15:
-            out = 'F';
-            break;
-    }
-    return out;
+void lcd_stinst5(char iord){
+ RD1 = 0;
+ lcd_databits(iord);
+ RD0 = 1;
+    _delay((unsigned long)((5)*(4000000/4000.0)));
+    RD0 = 0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+}
+
+void lcd_stinst1(char iord){
+ RD1 = 0;
+ lcd_databits(iord);
+ RD0 = 1;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+    RD0 = 0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+}
+
+
+void lcd_inst(char iord){
+ RD1 = 0;
+ lcd_databits(iord);
+ RD0 = 1;
+    _delay((unsigned long)((4)*(4000000/4000.0)));
+    RD0 = 0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+}
+
+
+void lcd_clear(void){
+ lcd_inst(0);
+ lcd_inst(1);
+}
+
+void lcd_start(void){
+    _delay((unsigned long)((15)*(4000000/4000.0)));
+    lcd_stinst5(0x030);
+    lcd_stinst1(0x030);
+    lcd_stinst1(0x030);
+
+    lcd_stinst5(0x38);
+    lcd_inst(0x10);
+    lcd_inst(0x01);
+    lcd_inst(0x06);
+    lcd_inst(0x0F);
+}
+
+void lcd_wchar(char word)
+{
+   char vol, vol2;
+   vol = word&0x0F;
+   vol2 = word&0xF0;
+   RD1 = 1;
+   lcd_databits((vol2>>4));
+   RD0 = 1;
+   _delay((unsigned long)((40)*(4000000/4000000.0)));
+   RD0 = 0;
+   lcd_databits(vol);
+   RD0 = 1;
+   _delay((unsigned long)((40)*(4000000/4000000.0)));
+   RD0 = 0;
+}
+
+void lcd_writechar(char m){
+    RD1 = 1;
+ lcd_databits(m);
+ RD0 = 1;
+    _delay((unsigned long)((4)*(4000000/4000.0)));
+    RD0 = 0;
+    _delay((unsigned long)((1)*(4000000/4000.0)));
+}
+
+
+void lcd_cursor_set(char x, char y)
+{
+ char a;
+ if(x == 1){
+        a = 127 + y;
+        lcd_inst(a);
+ }
+ else if(x == 2){
+        a = 191 + y;
+  lcd_inst(a);
+ }
 }

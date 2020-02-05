@@ -1,4 +1,4 @@
-# 1 "LabLCDisp.c"
+# 1 "adclib.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,27 +6,16 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "LabLCDisp.c" 2
-# 13 "LabLCDisp.c"
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
+# 1 "adclib.c" 2
 
 
 
 
 
+
+
+# 1 "./adclib.h" 1
+# 10 "./adclib.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2511,7 +2500,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 31 "LabLCDisp.c" 2
+# 10 "./adclib.h" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
@@ -2646,139 +2635,68 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 32 "LabLCDisp.c" 2
-
-# 1 "./LCDISPLIBLB3.h" 1
-# 11 "./LCDISPLIBLB3.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
-# 11 "./LCDISPLIBLB3.h" 2
-# 58 "./LCDISPLIBLB3.h"
-void lcd_start(void);
-void lcd_databits(char iord);
-void lcd_stinst5(char iord);
-void lcd_stinst4(char iord);
-void lcd_stinst1(char iord);
-void lcd_inst(char iord);
-void lcd_cursor_set(char x, char y);
-void lcd_writechar(char m);
-void lcd_char(char iord);
-# 33 "LabLCDisp.c" 2
-
-# 1 "./adclib.h" 1
-# 11 "./adclib.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 11 "./adclib.h" 2
 
 void initADC(char var1);
-# 34 "LabLCDisp.c" 2
+# 8 "adclib.c" 2
 
 
 
 
-char potval = 0;
-
-void __attribute__((picinterrupt(("")))) ISR(void){
-    if (PIR1bits.ADIF == 1){
-        PIR1bits.ADIF = 0;
-        potval = ADRESH;
-        ADCON0bits.GO = 1;
-    }
-    else
-        __asm("nop");
-}
-
-void main(void) {
-    TRISB = 0b100001;
-    ANSEL = 0;
-    ANSELH = 0b0010100;
-    TRISA = 0;
-    TRISD = 0;
-    ADCON1bits.ADFM = 1;
-    ADCON1bits.VCFG0 = 0;
-    ADCON1bits.VCFG1 = 0;
-    ADCON0 = 0b11000001;
-    INTCON = 0b11000000;
-    char pothim;
-    char potlom;
-    char phi;
-    char plo;
-    char contsa = 15;
-    lcd_start();
-    char ancha = 13;
-    initADC(ancha);
-    lcd_cursor_set(1,5);
-    lcd_char('1');
-    lcd_cursor_set(1,10);
-    lcd_char('2');
-    lcd_cursor_set(1,16);
-    lcd_char('3');
-    lcd_cursor_set(2,4);
-    lcd_char('4');
-    lcd_cursor_set(2,9);
-    lcd_char('5');
-    lcd_cursor_set(2,15);
-    lcd_char('6');
-    while(1){
-        pothim = potval;
-        potlom = potval;
-        plo = (potlom & contsa);
-        phi = pothim >> 4;
-        __asm("nop");
-    }
-    return;
-}
-
-char hex_to_lcd (char var1){
-    char out;
+void initADC(char var1) {
+    ADCON1 = 0b00000000;
     switch (var1){
         default:
-            out='-';
+            ADCON0 = 0b11000001;
             break;
         case 1:
-            out = '1';
+            ADCON0 = 0b11000101;
             break;
         case 2:
-            out = '2';
+            ADCON0 = 0b11001001;
             break;
         case 3:
-            out = '3';
+            ADCON0 = 0b11001101;
             break;
         case 4:
-            out = '4';
+            ADCON0 = 0b11010001;
             break;
         case 5:
-            out = '5';
+            ADCON0 = 0b11010101;
             break;
         case 6:
-            out = '6';
+            ADCON0 = 0b11011001;
             break;
         case 7:
-            out = '7';
+            ADCON0 = 0b11011101;
             break;
         case 8:
-            out = '8';
+            ADCON0 = 0b11100001;
             break;
         case 9:
-            out = '9';
+            ADCON0 = 0b11100101;
             break;
         case 10:
-            out = 'A';
+            ADCON0 = 0b11101001;
             break;
         case 11:
-            out = 'B';
+            ADCON0 = 0b11101101;
             break;
         case 12:
-            out = 'C';
+            ADCON0 = 0b11110001;
             break;
         case 13:
-            out = 'D';
+            ADCON0 = 0b11110101;
             break;
         case 14:
-            out = 'E';
+            ADCON0 = 0b11111001;
             break;
         case 15:
-            out = 'F';
+            ADCON0 = 0b11111101;
             break;
     }
-    return out;
+    PIE1bits.ADIE = 1;
+    PIR1bits.ADIF = 0;
+    ADCON0bits.GO = 1;
+    return;
 }
