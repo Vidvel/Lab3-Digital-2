@@ -2650,6 +2650,8 @@ void lcd_inst(char iord);
 void lcd_cursor_set(char x, char y);
 void lcd_writechar(char m);
 void lcd_char(char iord);
+void lcd_wstring(char *a);
+void lcd_clear(void);
 # 11 "LCDISPLIBLB3.c" 2
 # 20 "LCDISPLIBLB3.c"
 void lcd_databits(char data)
@@ -2741,12 +2743,6 @@ void lcd_inst(char iord){
     _delay((unsigned long)((1)*(4000000/4000.0)));
 }
 
-
-void lcd_clear(void){
- lcd_inst(0);
- lcd_inst(1);
-}
-
 void lcd_start(void){
     _delay((unsigned long)((15)*(4000000/4000.0)));
     lcd_stinst5(0x030);
@@ -2760,21 +2756,6 @@ void lcd_start(void){
     lcd_inst(0x0F);
 }
 
-void lcd_wchar(char word)
-{
-   char vol, vol2;
-   vol = word&0x0F;
-   vol2 = word&0xF0;
-   RD1 = 1;
-   lcd_databits((vol2>>4));
-   RD0 = 1;
-   _delay((unsigned long)((40)*(4000000/4000000.0)));
-   RD0 = 0;
-   lcd_databits(vol);
-   RD0 = 1;
-   _delay((unsigned long)((40)*(4000000/4000000.0)));
-   RD0 = 0;
-}
 
 void lcd_writechar(char m){
     RD1 = 1;
@@ -2797,4 +2778,16 @@ void lcd_cursor_set(char x, char y)
         a = 191 + y;
   lcd_inst(a);
  }
+}
+void lcd_clear(void)
+{
+ lcd_inst(0);
+ lcd_inst(1);
+}
+
+void lcd_wstring(char *a)
+{
+ int i;
+ for(i=0;a[i]!='\0';i++)
+    lcd_writechar(a[i]);
 }

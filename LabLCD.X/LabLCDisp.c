@@ -4,6 +4,7 @@
  *
  * Created on 3 de febrero de 2020, 05:19 PM
  */
+/* Codigo Float a Sting extraído de: https://www.tutorialspoint.com/c_standard_library/c_function_sprintf.htm */
 
 // PIC16F887 Configuration Bit Settings
 
@@ -30,8 +31,10 @@
 
 #include <xc.h>
 #include <stdint.h>
+#include <stdio.h>
 #include "LCDISPLIBLB3.h"
 #include "adclib.h"
+#define MAX 100 
 
 #define _XTAL_FREQ 4000000
 
@@ -58,32 +61,21 @@ void main(void) {
     ADCON1bits.VCFG1 = 0;
     ADCON0 = 0b11000001;
     INTCON = 0b11000000;
-    char pothim;
-    char potlom;
-    char phi;
-    char plo;
-    char contsa = 15;
+    float valf;
     lcd_start();
     char ancha = 13;
     initADC(ancha);
     lcd_cursor_set(1,5);
-    lcd_char('1');
-    lcd_cursor_set(1,10);
-    lcd_char('2');
-    lcd_cursor_set(1,16);
-    lcd_char('3');
-    lcd_cursor_set(2,4);
-    lcd_char('4');
-    lcd_cursor_set(2,9);
-    lcd_char('5');
-    lcd_cursor_set(2,15);
-    lcd_char('6');
+    lcd_wstring("Aiuda");
+    
     while(1){
-        pothim = potval;
-        potlom = potval;
-        plo = (potlom & contsa);
-        phi = pothim >> 4;
-        asm("nop");
+        valf = (potval/51.0f);
+        char text [16];
+        sprintf(text, "%.2f", valf);
+        lcd_cursor_set(2,1); 
+        lcd_wstring(text);
+        lcd_cursor_set(2,5);
+        lcd_wstring("V");
     }
     return;
 }

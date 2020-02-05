@@ -7,7 +7,7 @@
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "LabLCDisp.c" 2
-# 13 "LabLCDisp.c"
+# 14 "LabLCDisp.c"
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -2511,7 +2511,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 31 "LabLCDisp.c" 2
+# 32 "LabLCDisp.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
@@ -2646,7 +2646,106 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 32 "LabLCDisp.c" 2
+# 33 "LabLCDisp.c" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__size_t.h" 1 3
+
+
+
+typedef unsigned size_t;
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__null.h" 1 3
+# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdarg.h" 1 3
+
+
+
+
+
+
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+# 11 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+# 43 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+struct __prbuf
+{
+ char * ptr;
+ void (* func)(char);
+};
+# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 1 3
+
+
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 1 3
+# 29 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 3
+extern int errno;
+# 8 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 2 3
+
+
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+
+
+extern char * cgets(char *);
+extern void cputs(const char *);
+# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+
+
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+# 180 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+# 34 "LabLCDisp.c" 2
 
 # 1 "./LCDISPLIBLB3.h" 1
 # 11 "./LCDISPLIBLB3.h"
@@ -2662,7 +2761,9 @@ void lcd_inst(char iord);
 void lcd_cursor_set(char x, char y);
 void lcd_writechar(char m);
 void lcd_char(char iord);
-# 33 "LabLCDisp.c" 2
+void lcd_wstring(char *a);
+void lcd_clear(void);
+# 35 "LabLCDisp.c" 2
 
 # 1 "./adclib.h" 1
 # 11 "./adclib.h"
@@ -2670,7 +2771,8 @@ void lcd_char(char iord);
 # 11 "./adclib.h" 2
 
 void initADC(char var1);
-# 34 "LabLCDisp.c" 2
+# 36 "LabLCDisp.c" 2
+
 
 
 
@@ -2698,32 +2800,21 @@ void main(void) {
     ADCON1bits.VCFG1 = 0;
     ADCON0 = 0b11000001;
     INTCON = 0b11000000;
-    char pothim;
-    char potlom;
-    char phi;
-    char plo;
-    char contsa = 15;
+    float valf;
     lcd_start();
     char ancha = 13;
     initADC(ancha);
     lcd_cursor_set(1,5);
-    lcd_char('1');
-    lcd_cursor_set(1,10);
-    lcd_char('2');
-    lcd_cursor_set(1,16);
-    lcd_char('3');
-    lcd_cursor_set(2,4);
-    lcd_char('4');
-    lcd_cursor_set(2,9);
-    lcd_char('5');
-    lcd_cursor_set(2,15);
-    lcd_char('6');
+    lcd_wstring("Aiuda");
+
     while(1){
-        pothim = potval;
-        potlom = potval;
-        plo = (potlom & contsa);
-        phi = pothim >> 4;
-        __asm("nop");
+        valf = (potval/51.0f);
+        char text [16];
+        sprintf(text, "%.2f", valf);
+        lcd_cursor_set(2,1);
+        lcd_wstring(text);
+        lcd_cursor_set(2,5);
+        lcd_wstring("V");
     }
     return;
 }

@@ -106,12 +106,6 @@ void lcd_inst(char iord){
     __delay_ms(1);
 }
 
-
-void lcd_clear(void){
-	lcd_inst(0);
-	lcd_inst(1);
-}
-
 void lcd_start(void){
     __delay_ms(15);
     lcd_stinst5(0x030);
@@ -147,4 +141,16 @@ void lcd_cursor_set(char x, char y)
         a = 191 + y;
 		lcd_inst(a);
 	}
+}
+void lcd_clear(void)
+{
+	lcd_inst(0);
+	lcd_inst(1);
+}
+
+void lcd_wstring(char *a)
+{
+	int i;
+	for(i=0;a[i]!='\0';i++)
+	   lcd_writechar(a[i]);
 }

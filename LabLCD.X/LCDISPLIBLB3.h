@@ -55,17 +55,16 @@
 #define D7 RA7
 #endif
 
-void lcd_start(void);
-void lcd_databits(char iord);
-void lcd_stinst5(char iord);
-void lcd_stinst4(char iord);
-void lcd_stinst1(char iord);
-void lcd_inst(char iord);
-void lcd_cursor_set(char x, char y);
+void lcd_start(void); //1
+void lcd_databits(char iord); //1
+void lcd_stinst5(char iord); //1
+void lcd_stinst4(char iord); //1
+void lcd_stinst1(char iord); //1
+void lcd_inst(char iord); //1
+void lcd_cursor_set(char x, char y); //1
 void lcd_writechar(char m);
 void lcd_char(char iord);
-/*
+void lcd_wstring(char *a);
 void lcd_clear(void);
-void lcd_wchar(char word);*/
 
 #endif	/* LCDISPLIBLB3_H */
