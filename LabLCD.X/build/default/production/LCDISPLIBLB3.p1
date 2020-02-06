@@ -607,8 +607,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;LCDISPLIBLB3.c: 118:     lcd_inst(0x06);
 [e ( _lcd_inst (1 -> -> 6 `i `uc ]
 "119
-[; ;LCDISPLIBLB3.c: 119:     lcd_inst(0x0F);
-[e ( _lcd_inst (1 -> -> 15 `i `uc ]
+[; ;LCDISPLIBLB3.c: 119:     lcd_inst(0x0C);
+[e ( _lcd_inst (1 -> -> 12 `i `uc ]
 "120
 [; ;LCDISPLIBLB3.c: 120: }
 [e :UE 159 ]

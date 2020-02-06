@@ -116,7 +116,7 @@ void lcd_start(void){
     lcd_inst(0x10);
     lcd_inst(0x01);
     lcd_inst(0x06);
-    lcd_inst(0x0F);
+    lcd_inst(0x0C);
 }
 
 

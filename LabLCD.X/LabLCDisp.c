@@ -31,19 +31,33 @@
 
 #include <xc.h>
 #include <stdint.h>
-#include <stdio.h>
 #include "LCDISPLIBLB3.h"
 #include "adclib.h"
-#define MAX 100 
 
 #define _XTAL_FREQ 4000000
 
-char potval = 0; 
+char ADCval1 = 0; 
+char ADCval2 = 0;
+char ADCchannel = 0;
+
+void dispval1(float dataf);
+void dispval2(float dataf);
 
 void __interrupt() ISR(void){
     if (PIR1bits.ADIF == 1){
         PIR1bits.ADIF = 0;
-        potval = ADRESH;
+        switch (ADCchannel){
+            case 0:
+                ADCval1 = ADRESH;
+                ADCON0bits.CHS = 0b1100;
+                ADCchannel = 1;
+                break;
+            case 1:
+                ADCval2 = ADRESH;
+                ADCON0bits.CHS = 0b1101;   
+                ADCchannel = 0;
+                break;
+        }
         ADCON0bits.GO = 1;
     }
     else
@@ -61,76 +75,269 @@ void main(void) {
     ADCON1bits.VCFG1 = 0;
     ADCON0 = 0b11000001;
     INTCON = 0b11000000;
-    float valf;
+    float valf1;
+    float valf2;
     lcd_start();
     char ancha = 13;
     initADC(ancha);
-    lcd_cursor_set(1,5);
-    lcd_wstring("Aiuda");
+    lcd_cursor_set(1,2);
+    lcd_wstring("SP1"); 
+    
+    lcd_cursor_set(1,8);
+    lcd_wstring("SP2"); 
+    
+    lcd_cursor_set(1,13);
+    lcd_wstring("CONT"); 
     
     while(1){
-        valf = (potval/51.0f);
-        char text [16];
-        sprintf(text, "%.2f", valf);
-        lcd_cursor_set(2,1); 
-        lcd_wstring(text);
-        lcd_cursor_set(2,5);
-        lcd_wstring("V");
+        valf1 = (ADCval1/51.0f);
+        valf2 = (ADCval2/51.0f);
+        dispval1(valf1);
+        dispval2(valf2);   
     }
     return;
 }
 
-char hex_to_lcd (char var1){
-    char out;
-    switch (var1){
-        default:
-            out='-';
+void dispval1(float dataf){
+    int vals;
+    int dec2;
+    int dec1;
+    int ent;
+    vals = dataf*100.0f;
+    vals = vals/1;
+    dec2 = vals%10;
+    vals = vals/10;
+    dec1 = vals%10;
+    ent = vals/10;
+    switch (ent){
+        case 0:
+            lcd_cursor_set(2,1);
+            lcd_wstring("0");
             break;
         case 1:
-            out = '1';
+            lcd_cursor_set(2,1);
+            lcd_wstring("1");
             break;
         case 2:
-            out = '2';
+            lcd_cursor_set(2,1);
+            lcd_wstring("2");
             break;
         case 3:
-            out = '3';
+            lcd_cursor_set(2,1);
+            lcd_wstring("3");
             break;
         case 4:
-            out = '4';
-            break;
+            lcd_cursor_set(2,1);
+            lcd_wstring("4");
+            break;   
         case 5:
-            out = '5';
+            lcd_cursor_set(2,1);
+            lcd_wstring("5");
             break;
         case 6:
-            out = '6';
+            lcd_cursor_set(2,1);
+            lcd_wstring("6");
             break;
         case 7:
-            out = '7';
+            lcd_cursor_set(2,1);
+            lcd_wstring("7");
             break;
         case 8:
-            out = '8';
+            lcd_cursor_set(2,1);
+            lcd_wstring("8");
             break;
         case 9:
-            out = '9';
-            break;
-        case 10:
-            out = 'A';
-            break;
-        case 11:
-            out = 'B';
-            break;
-        case 12:
-            out = 'C';
-            break;
-        case 13:
-            out = 'D';
-            break;
-        case 14:
-            out = 'E';
-            break;
-        case 15:
-            out = 'F';
+            lcd_cursor_set(2,1);
+            lcd_wstring("9");
             break;
     }
-    return out;
+    lcd_wstring(".");
+    switch (dec1){
+        case 0:
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_wstring("4");
+            break;   
+        case 5:
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_wstring("9");
+            break;
+    }
+    switch (dec2){
+        case 0:
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_wstring("4");
+            break;   
+        case 5:
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_wstring("9");
+            break;
+    }
+    lcd_wstring("V");
+    return;
+}
+
+void dispval2(float dataf){
+    int vals;
+    int dec2;
+    int dec1;
+    int ent;
+    vals = dataf*100.0f;
+    vals = vals/1;
+    dec2 = vals%10;
+    vals = vals/10;
+    dec1 = vals%10;
+    ent = vals/10;
+    switch (ent){
+        case 0:
+            lcd_cursor_set(2,7);
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_cursor_set(2,7);
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_cursor_set(2,7);
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_cursor_set(2,7);
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_cursor_set(2,7);
+            lcd_wstring("4");
+            break;   
+        case 5:
+            lcd_cursor_set(2,7);
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_cursor_set(2,7);
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_cursor_set(2,7);
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_cursor_set(2,7);
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_cursor_set(2,7);
+            lcd_wstring("9");
+            break;
+    }
+    lcd_wstring(".");
+    switch (dec1){
+        case 0:
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_wstring("4");
+            break;   
+        case 5:
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_wstring("9");
+            break;
+    }
+    switch (dec2){
+        case 0:
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_wstring("4");
+            break;   
+        case 5:
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_wstring("9");
+            break;
+    }
+    lcd_wstring("V");
+    return;
 }

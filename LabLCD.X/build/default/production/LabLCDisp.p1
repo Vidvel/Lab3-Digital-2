@@ -83,8 +83,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "67
 [; ;./LCDISPLIBLB3.h: 67: void lcd_wstring(char *a);
 [v _lcd_wstring `(v ~T0 @X0 0 ef1`*uc ]
-"194 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdio.h
-[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
+"43 LabLCDisp.c
+[; ;LabLCDisp.c: 43: void dispval1(float dataf);
+[v _dispval1 `(v ~T0 @X0 0 ef1`f ]
+"44
+[; ;LabLCDisp.c: 44: void dispval2(float dataf);
+[v _dispval2 `(v ~T0 @X0 0 ef1`f ]
 "14 LabLCDisp.c
 [p x FOSC = INTRC_NOCLKOUT ]
 "15
@@ -343,330 +347,1089 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"41 LabLCDisp.c
-[; ;LabLCDisp.c: 41: char potval = 0;
-[v _potval `uc ~T0 @X0 1 e ]
-[i _potval
+"39 LabLCDisp.c
+[; ;LabLCDisp.c: 39: char ADCval1 = 0;
+[v _ADCval1 `uc ~T0 @X0 1 e ]
+[i _ADCval1
+-> -> 0 `i `uc
+]
+"40
+[; ;LabLCDisp.c: 40: char ADCval2 = 0;
+[v _ADCval2 `uc ~T0 @X0 1 e ]
+[i _ADCval2
+-> -> 0 `i `uc
+]
+"41
+[; ;LabLCDisp.c: 41: char ADCchannel = 0;
+[v _ADCchannel `uc ~T0 @X0 1 e ]
+[i _ADCchannel
 -> -> 0 `i `uc
 ]
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-"43
-[; ;LabLCDisp.c: 43: void __attribute__((picinterrupt(("")))) ISR(void){
+"46
+[; ;LabLCDisp.c: 46: void __attribute__((picinterrupt(("")))) ISR(void){
 [v _ISR `(v ~T1 @X0 1 ef ]
 {
 [e :U _ISR ]
 [f ]
-"44
-[; ;LabLCDisp.c: 44:     if (PIR1bits.ADIF == 1){
-[e $ ! == -> . . _PIR1bits 0 6 `i -> 1 `i 140  ]
-{
-"45
-[; ;LabLCDisp.c: 45:         PIR1bits.ADIF = 0;
-[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-"46
-[; ;LabLCDisp.c: 46:         potval = ADRESH;
-[e = _potval -> _ADRESH `uc ]
 "47
-[; ;LabLCDisp.c: 47:         ADCON0bits.GO = 1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+[; ;LabLCDisp.c: 47:     if (PIR1bits.ADIF == 1){
+[e $ ! == -> . . _PIR1bits 0 6 `i -> 1 `i 139  ]
+{
 "48
-[; ;LabLCDisp.c: 48:     }
-}
-[e $U 141  ]
+[; ;LabLCDisp.c: 48:         PIR1bits.ADIF = 0;
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
 "49
-[; ;LabLCDisp.c: 49:     else
-[e :U 140 ]
+[; ;LabLCDisp.c: 49:         switch (ADCchannel){
+[e $U 141  ]
+{
 "50
-[; ;LabLCDisp.c: 50:         __asm("nop");
-[; <" nop ;# ">
-[e :U 141 ]
+[; ;LabLCDisp.c: 50:             case 0:
+[e :U 142 ]
 "51
-[; ;LabLCDisp.c: 51: }
-[e :UE 139 ]
+[; ;LabLCDisp.c: 51:                 ADCval1 = ADRESH;
+[e = _ADCval1 -> _ADRESH `uc ]
+"52
+[; ;LabLCDisp.c: 52:                 ADCON0bits.CHS = 0b1100;
+[e = . . _ADCON0bits 0 2 -> -> 12 `i `uc ]
+"53
+[; ;LabLCDisp.c: 53:                 ADCchannel = 1;
+[e = _ADCchannel -> -> 1 `i `uc ]
+"54
+[; ;LabLCDisp.c: 54:                 break;
+[e $U 140  ]
+"55
+[; ;LabLCDisp.c: 55:             case 1:
+[e :U 143 ]
+"56
+[; ;LabLCDisp.c: 56:                 ADCval2 = ADRESH;
+[e = _ADCval2 -> _ADRESH `uc ]
+"57
+[; ;LabLCDisp.c: 57:                 ADCON0bits.CHS = 0b1101;
+[e = . . _ADCON0bits 0 2 -> -> 13 `i `uc ]
+"58
+[; ;LabLCDisp.c: 58:                 ADCchannel = 0;
+[e = _ADCchannel -> -> 0 `i `uc ]
+"59
+[; ;LabLCDisp.c: 59:                 break;
+[e $U 140  ]
+"60
+[; ;LabLCDisp.c: 60:         }
+}
+[e $U 140  ]
+[e :U 141 ]
+[e [\ -> _ADCchannel `i , $ -> 0 `i 142
+ , $ -> 1 `i 143
+ 140 ]
+[e :U 140 ]
+"61
+[; ;LabLCDisp.c: 61:         ADCON0bits.GO = 1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+"62
+[; ;LabLCDisp.c: 62:     }
+}
+[e $U 144  ]
+"63
+[; ;LabLCDisp.c: 63:     else
+[e :U 139 ]
+"64
+[; ;LabLCDisp.c: 64:         __asm("nop");
+[; <" nop ;# ">
+[e :U 144 ]
+"65
+[; ;LabLCDisp.c: 65: }
+[e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"53
-[; ;LabLCDisp.c: 53: void main(void) {
+"67
+[; ;LabLCDisp.c: 67: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"54
-[; ;LabLCDisp.c: 54:     TRISB = 0b100001;
+"68
+[; ;LabLCDisp.c: 68:     TRISB = 0b100001;
 [e = _TRISB -> -> 33 `i `uc ]
-"55
-[; ;LabLCDisp.c: 55:     ANSEL = 0;
+"69
+[; ;LabLCDisp.c: 69:     ANSEL = 0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"56
-[; ;LabLCDisp.c: 56:     ANSELH = 0b0010100;
+"70
+[; ;LabLCDisp.c: 70:     ANSELH = 0b0010100;
 [e = _ANSELH -> -> 20 `i `uc ]
-"57
-[; ;LabLCDisp.c: 57:     TRISA = 0;
+"71
+[; ;LabLCDisp.c: 71:     TRISA = 0;
 [e = _TRISA -> -> 0 `i `uc ]
-"58
-[; ;LabLCDisp.c: 58:     TRISD = 0;
+"72
+[; ;LabLCDisp.c: 72:     TRISD = 0;
 [e = _TRISD -> -> 0 `i `uc ]
-"59
-[; ;LabLCDisp.c: 59:     ADCON1bits.ADFM = 1;
+"73
+[; ;LabLCDisp.c: 73:     ADCON1bits.ADFM = 1;
 [e = . . _ADCON1bits 0 4 -> -> 1 `i `uc ]
-"60
-[; ;LabLCDisp.c: 60:     ADCON1bits.VCFG0 = 0;
+"74
+[; ;LabLCDisp.c: 74:     ADCON1bits.VCFG0 = 0;
 [e = . . _ADCON1bits 0 1 -> -> 0 `i `uc ]
-"61
-[; ;LabLCDisp.c: 61:     ADCON1bits.VCFG1 = 0;
+"75
+[; ;LabLCDisp.c: 75:     ADCON1bits.VCFG1 = 0;
 [e = . . _ADCON1bits 0 2 -> -> 0 `i `uc ]
-"62
-[; ;LabLCDisp.c: 62:     ADCON0 = 0b11000001;
+"76
+[; ;LabLCDisp.c: 76:     ADCON0 = 0b11000001;
 [e = _ADCON0 -> -> 193 `i `uc ]
-"63
-[; ;LabLCDisp.c: 63:     INTCON = 0b11000000;
+"77
+[; ;LabLCDisp.c: 77:     INTCON = 0b11000000;
 [e = _INTCON -> -> 192 `i `uc ]
-"64
-[; ;LabLCDisp.c: 64:     float valf;
-[v _valf `f ~T0 @X0 1 a ]
-"65
-[; ;LabLCDisp.c: 65:     lcd_start();
+"78
+[; ;LabLCDisp.c: 78:     float valf1;
+[v _valf1 `f ~T0 @X0 1 a ]
+"79
+[; ;LabLCDisp.c: 79:     float valf2;
+[v _valf2 `f ~T0 @X0 1 a ]
+"80
+[; ;LabLCDisp.c: 80:     lcd_start();
 [e ( _lcd_start ..  ]
-"66
-[; ;LabLCDisp.c: 66:     char ancha = 13;
+"81
+[; ;LabLCDisp.c: 81:     char ancha = 13;
 [v _ancha `uc ~T0 @X0 1 a ]
 [e = _ancha -> -> 13 `i `uc ]
-"67
-[; ;LabLCDisp.c: 67:     initADC(ancha);
+"82
+[; ;LabLCDisp.c: 82:     initADC(ancha);
 [e ( _initADC (1 _ancha ]
-"68
-[; ;LabLCDisp.c: 68:     lcd_cursor_set(1,5);
-[e ( _lcd_cursor_set (2 , -> -> 1 `i `uc -> -> 5 `i `uc ]
-"69
-[; ;LabLCDisp.c: 69:     lcd_wstring("Aiuda");
-[e ( _lcd_wstring (1 :s 1C ]
-"71
-[; ;LabLCDisp.c: 71:     while(1){
-[e :U 144 ]
-{
-"72
-[; ;LabLCDisp.c: 72:         valf = (potval/51.0f);
-[e = _valf / -> -> _potval `i `f -> .51.0 `f ]
-"73
-[; ;LabLCDisp.c: 73:         char text [16];
-[v _text `uc ~T0 @X0 -> 16 `i a ]
-"74
-[; ;LabLCDisp.c: 74:         sprintf(text, "%.2f", valf);
-[e ( _sprintf (1 , (. , &U _text :s 2C -> _valf `d ]
-"75
-[; ;LabLCDisp.c: 75:         lcd_cursor_set(2,1);
-[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"76
-[; ;LabLCDisp.c: 76:         lcd_wstring(text);
-[e ( _lcd_wstring (1 &U _text ]
-"77
-[; ;LabLCDisp.c: 77:         lcd_cursor_set(2,5);
-[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 5 `i `uc ]
-"78
-[; ;LabLCDisp.c: 78:         lcd_wstring("V");
-[e ( _lcd_wstring (1 :s 3C ]
-"79
-[; ;LabLCDisp.c: 79:     }
-}
-[e :U 143 ]
-[e $U 144  ]
-[e :U 145 ]
-"80
-[; ;LabLCDisp.c: 80:     return;
-[e $UE 142  ]
-"81
-[; ;LabLCDisp.c: 81: }
-[e :UE 142 ]
-}
 "83
-[; ;LabLCDisp.c: 83: char hex_to_lcd (char var1){
-[v _hex_to_lcd `(uc ~T0 @X0 1 ef1`uc ]
-{
-[e :U _hex_to_lcd ]
-[v _var1 `uc ~T0 @X0 1 r1 ]
-[f ]
+[; ;LabLCDisp.c: 83:     lcd_cursor_set(1,2);
+[e ( _lcd_cursor_set (2 , -> -> 1 `i `uc -> -> 2 `i `uc ]
 "84
-[; ;LabLCDisp.c: 84:     char out;
-[v _out `uc ~T0 @X0 1 a ]
-"85
-[; ;LabLCDisp.c: 85:     switch (var1){
-[e $U 148  ]
-{
+[; ;LabLCDisp.c: 84:     lcd_wstring("SP1");
+[e ( _lcd_wstring (1 :s 1C ]
 "86
-[; ;LabLCDisp.c: 86:         default:
-[e :U 149 ]
+[; ;LabLCDisp.c: 86:     lcd_cursor_set(1,8);
+[e ( _lcd_cursor_set (2 , -> -> 1 `i `uc -> -> 8 `i `uc ]
 "87
-[; ;LabLCDisp.c: 87:             out='-';
-[e = _out -> -> 45 `ui `uc ]
-"88
-[; ;LabLCDisp.c: 88:             break;
-[e $U 147  ]
+[; ;LabLCDisp.c: 87:     lcd_wstring("SP2");
+[e ( _lcd_wstring (1 :s 2C ]
 "89
-[; ;LabLCDisp.c: 89:         case 1:
-[e :U 150 ]
+[; ;LabLCDisp.c: 89:     lcd_cursor_set(1,13);
+[e ( _lcd_cursor_set (2 , -> -> 1 `i `uc -> -> 13 `i `uc ]
 "90
-[; ;LabLCDisp.c: 90:             out = '1';
-[e = _out -> -> 49 `ui `uc ]
-"91
-[; ;LabLCDisp.c: 91:             break;
-[e $U 147  ]
+[; ;LabLCDisp.c: 90:     lcd_wstring("CONT");
+[e ( _lcd_wstring (1 :s 3C ]
 "92
-[; ;LabLCDisp.c: 92:         case 2:
-[e :U 151 ]
+[; ;LabLCDisp.c: 92:     while(1){
+[e :U 147 ]
+{
 "93
-[; ;LabLCDisp.c: 93:             out = '2';
-[e = _out -> -> 50 `ui `uc ]
+[; ;LabLCDisp.c: 93:         valf1 = (ADCval1/51.0f);
+[e = _valf1 / -> -> _ADCval1 `i `f -> .51.0 `f ]
 "94
-[; ;LabLCDisp.c: 94:             break;
-[e $U 147  ]
+[; ;LabLCDisp.c: 94:         valf2 = (ADCval2/51.0f);
+[e = _valf2 / -> -> _ADCval2 `i `f -> .51.0 `f ]
 "95
-[; ;LabLCDisp.c: 95:         case 3:
-[e :U 152 ]
+[; ;LabLCDisp.c: 95:         dispval1(valf1);
+[e ( _dispval1 (1 _valf1 ]
 "96
-[; ;LabLCDisp.c: 96:             out = '3';
-[e = _out -> -> 51 `ui `uc ]
+[; ;LabLCDisp.c: 96:         dispval2(valf2);
+[e ( _dispval2 (1 _valf2 ]
 "97
-[; ;LabLCDisp.c: 97:             break;
-[e $U 147  ]
-"98
-[; ;LabLCDisp.c: 98:         case 4:
-[e :U 153 ]
-"99
-[; ;LabLCDisp.c: 99:             out = '4';
-[e = _out -> -> 52 `ui `uc ]
-"100
-[; ;LabLCDisp.c: 100:             break;
-[e $U 147  ]
-"101
-[; ;LabLCDisp.c: 101:         case 5:
-[e :U 154 ]
-"102
-[; ;LabLCDisp.c: 102:             out = '5';
-[e = _out -> -> 53 `ui `uc ]
-"103
-[; ;LabLCDisp.c: 103:             break;
-[e $U 147  ]
-"104
-[; ;LabLCDisp.c: 104:         case 6:
-[e :U 155 ]
-"105
-[; ;LabLCDisp.c: 105:             out = '6';
-[e = _out -> -> 54 `ui `uc ]
-"106
-[; ;LabLCDisp.c: 106:             break;
-[e $U 147  ]
-"107
-[; ;LabLCDisp.c: 107:         case 7:
-[e :U 156 ]
-"108
-[; ;LabLCDisp.c: 108:             out = '7';
-[e = _out -> -> 55 `ui `uc ]
-"109
-[; ;LabLCDisp.c: 109:             break;
-[e $U 147  ]
-"110
-[; ;LabLCDisp.c: 110:         case 8:
-[e :U 157 ]
-"111
-[; ;LabLCDisp.c: 111:             out = '8';
-[e = _out -> -> 56 `ui `uc ]
-"112
-[; ;LabLCDisp.c: 112:             break;
-[e $U 147  ]
-"113
-[; ;LabLCDisp.c: 113:         case 9:
-[e :U 158 ]
-"114
-[; ;LabLCDisp.c: 114:             out = '9';
-[e = _out -> -> 57 `ui `uc ]
-"115
-[; ;LabLCDisp.c: 115:             break;
-[e $U 147  ]
-"116
-[; ;LabLCDisp.c: 116:         case 10:
-[e :U 159 ]
-"117
-[; ;LabLCDisp.c: 117:             out = 'A';
-[e = _out -> -> 65 `ui `uc ]
-"118
-[; ;LabLCDisp.c: 118:             break;
-[e $U 147  ]
-"119
-[; ;LabLCDisp.c: 119:         case 11:
-[e :U 160 ]
-"120
-[; ;LabLCDisp.c: 120:             out = 'B';
-[e = _out -> -> 66 `ui `uc ]
-"121
-[; ;LabLCDisp.c: 121:             break;
-[e $U 147  ]
-"122
-[; ;LabLCDisp.c: 122:         case 12:
-[e :U 161 ]
-"123
-[; ;LabLCDisp.c: 123:             out = 'C';
-[e = _out -> -> 67 `ui `uc ]
-"124
-[; ;LabLCDisp.c: 124:             break;
-[e $U 147  ]
-"125
-[; ;LabLCDisp.c: 125:         case 13:
-[e :U 162 ]
-"126
-[; ;LabLCDisp.c: 126:             out = 'D';
-[e = _out -> -> 68 `ui `uc ]
-"127
-[; ;LabLCDisp.c: 127:             break;
-[e $U 147  ]
-"128
-[; ;LabLCDisp.c: 128:         case 14:
-[e :U 163 ]
-"129
-[; ;LabLCDisp.c: 129:             out = 'E';
-[e = _out -> -> 69 `ui `uc ]
-"130
-[; ;LabLCDisp.c: 130:             break;
-[e $U 147  ]
-"131
-[; ;LabLCDisp.c: 131:         case 15:
-[e :U 164 ]
-"132
-[; ;LabLCDisp.c: 132:             out = 'F';
-[e = _out -> -> 70 `ui `uc ]
-"133
-[; ;LabLCDisp.c: 133:             break;
-[e $U 147  ]
-"134
-[; ;LabLCDisp.c: 134:     }
+[; ;LabLCDisp.c: 97:     }
 }
+[e :U 146 ]
 [e $U 147  ]
 [e :U 148 ]
-[e [\ -> _var1 `i , $ -> 1 `i 150
- , $ -> 2 `i 151
- , $ -> 3 `i 152
- , $ -> 4 `i 153
- , $ -> 5 `i 154
- , $ -> 6 `i 155
- , $ -> 7 `i 156
- , $ -> 8 `i 157
- , $ -> 9 `i 158
- , $ -> 10 `i 159
- , $ -> 11 `i 160
- , $ -> 12 `i 161
- , $ -> 13 `i 162
- , $ -> 14 `i 163
- , $ -> 15 `i 164
- 149 ]
-[e :U 147 ]
-"135
-[; ;LabLCDisp.c: 135:     return out;
-[e ) _out ]
-[e $UE 146  ]
-"136
-[; ;LabLCDisp.c: 136: }
-[e :UE 146 ]
+"98
+[; ;LabLCDisp.c: 98:     return;
+[e $UE 145  ]
+"99
+[; ;LabLCDisp.c: 99: }
+[e :UE 145 ]
 }
-[p f _sprintf 8462336 ]
-[a 2C 37 46 50 102 0 ]
-[a 1C 65 105 117 100 97 0 ]
-[a 3C 86 0 ]
+"101
+[; ;LabLCDisp.c: 101: void dispval1(float dataf){
+[v _dispval1 `(v ~T0 @X0 1 ef1`f ]
+{
+[e :U _dispval1 ]
+[v _dataf `f ~T0 @X0 1 r1 ]
+[f ]
+"102
+[; ;LabLCDisp.c: 102:     int vals;
+[v _vals `i ~T0 @X0 1 a ]
+"103
+[; ;LabLCDisp.c: 103:     int dec2;
+[v _dec2 `i ~T0 @X0 1 a ]
+"104
+[; ;LabLCDisp.c: 104:     int dec1;
+[v _dec1 `i ~T0 @X0 1 a ]
+"105
+[; ;LabLCDisp.c: 105:     int ent;
+[v _ent `i ~T0 @X0 1 a ]
+"106
+[; ;LabLCDisp.c: 106:     vals = dataf*100.0f;
+[e = _vals -> * _dataf -> .100.0 `f `i ]
+"107
+[; ;LabLCDisp.c: 107:     vals = vals/1;
+[e = _vals / _vals -> 1 `i ]
+"108
+[; ;LabLCDisp.c: 108:     dec2 = vals%10;
+[e = _dec2 % _vals -> 10 `i ]
+"109
+[; ;LabLCDisp.c: 109:     vals = vals/10;
+[e = _vals / _vals -> 10 `i ]
+"110
+[; ;LabLCDisp.c: 110:     dec1 = vals%10;
+[e = _dec1 % _vals -> 10 `i ]
+"111
+[; ;LabLCDisp.c: 111:     ent = vals/10;
+[e = _ent / _vals -> 10 `i ]
+"112
+[; ;LabLCDisp.c: 112:     switch (ent){
+[e $U 151  ]
+{
+"113
+[; ;LabLCDisp.c: 113:         case 0:
+[e :U 152 ]
+"114
+[; ;LabLCDisp.c: 114:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"115
+[; ;LabLCDisp.c: 115:             lcd_wstring("0");
+[e ( _lcd_wstring (1 :s 4C ]
+"116
+[; ;LabLCDisp.c: 116:             break;
+[e $U 150  ]
+"117
+[; ;LabLCDisp.c: 117:         case 1:
+[e :U 153 ]
+"118
+[; ;LabLCDisp.c: 118:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"119
+[; ;LabLCDisp.c: 119:             lcd_wstring("1");
+[e ( _lcd_wstring (1 :s 5C ]
+"120
+[; ;LabLCDisp.c: 120:             break;
+[e $U 150  ]
+"121
+[; ;LabLCDisp.c: 121:         case 2:
+[e :U 154 ]
+"122
+[; ;LabLCDisp.c: 122:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"123
+[; ;LabLCDisp.c: 123:             lcd_wstring("2");
+[e ( _lcd_wstring (1 :s 6C ]
+"124
+[; ;LabLCDisp.c: 124:             break;
+[e $U 150  ]
+"125
+[; ;LabLCDisp.c: 125:         case 3:
+[e :U 155 ]
+"126
+[; ;LabLCDisp.c: 126:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"127
+[; ;LabLCDisp.c: 127:             lcd_wstring("3");
+[e ( _lcd_wstring (1 :s 7C ]
+"128
+[; ;LabLCDisp.c: 128:             break;
+[e $U 150  ]
+"129
+[; ;LabLCDisp.c: 129:         case 4:
+[e :U 156 ]
+"130
+[; ;LabLCDisp.c: 130:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"131
+[; ;LabLCDisp.c: 131:             lcd_wstring("4");
+[e ( _lcd_wstring (1 :s 8C ]
+"132
+[; ;LabLCDisp.c: 132:             break;
+[e $U 150  ]
+"133
+[; ;LabLCDisp.c: 133:         case 5:
+[e :U 157 ]
+"134
+[; ;LabLCDisp.c: 134:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"135
+[; ;LabLCDisp.c: 135:             lcd_wstring("5");
+[e ( _lcd_wstring (1 :s 9C ]
+"136
+[; ;LabLCDisp.c: 136:             break;
+[e $U 150  ]
+"137
+[; ;LabLCDisp.c: 137:         case 6:
+[e :U 158 ]
+"138
+[; ;LabLCDisp.c: 138:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"139
+[; ;LabLCDisp.c: 139:             lcd_wstring("6");
+[e ( _lcd_wstring (1 :s 10C ]
+"140
+[; ;LabLCDisp.c: 140:             break;
+[e $U 150  ]
+"141
+[; ;LabLCDisp.c: 141:         case 7:
+[e :U 159 ]
+"142
+[; ;LabLCDisp.c: 142:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"143
+[; ;LabLCDisp.c: 143:             lcd_wstring("7");
+[e ( _lcd_wstring (1 :s 11C ]
+"144
+[; ;LabLCDisp.c: 144:             break;
+[e $U 150  ]
+"145
+[; ;LabLCDisp.c: 145:         case 8:
+[e :U 160 ]
+"146
+[; ;LabLCDisp.c: 146:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"147
+[; ;LabLCDisp.c: 147:             lcd_wstring("8");
+[e ( _lcd_wstring (1 :s 12C ]
+"148
+[; ;LabLCDisp.c: 148:             break;
+[e $U 150  ]
+"149
+[; ;LabLCDisp.c: 149:         case 9:
+[e :U 161 ]
+"150
+[; ;LabLCDisp.c: 150:             lcd_cursor_set(2,1);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"151
+[; ;LabLCDisp.c: 151:             lcd_wstring("9");
+[e ( _lcd_wstring (1 :s 13C ]
+"152
+[; ;LabLCDisp.c: 152:             break;
+[e $U 150  ]
+"153
+[; ;LabLCDisp.c: 153:     }
+}
+[e $U 150  ]
+[e :U 151 ]
+[e [\ _ent , $ -> 0 `i 152
+ , $ -> 1 `i 153
+ , $ -> 2 `i 154
+ , $ -> 3 `i 155
+ , $ -> 4 `i 156
+ , $ -> 5 `i 157
+ , $ -> 6 `i 158
+ , $ -> 7 `i 159
+ , $ -> 8 `i 160
+ , $ -> 9 `i 161
+ 150 ]
+[e :U 150 ]
+"154
+[; ;LabLCDisp.c: 154:     lcd_wstring(".");
+[e ( _lcd_wstring (1 :s 14C ]
+"155
+[; ;LabLCDisp.c: 155:     switch (dec1){
+[e $U 163  ]
+{
+"156
+[; ;LabLCDisp.c: 156:         case 0:
+[e :U 164 ]
+"157
+[; ;LabLCDisp.c: 157:             lcd_wstring("0");
+[e ( _lcd_wstring (1 :s 15C ]
+"158
+[; ;LabLCDisp.c: 158:             break;
+[e $U 162  ]
+"159
+[; ;LabLCDisp.c: 159:         case 1:
+[e :U 165 ]
+"160
+[; ;LabLCDisp.c: 160:             lcd_wstring("1");
+[e ( _lcd_wstring (1 :s 16C ]
+"161
+[; ;LabLCDisp.c: 161:             break;
+[e $U 162  ]
+"162
+[; ;LabLCDisp.c: 162:         case 2:
+[e :U 166 ]
+"163
+[; ;LabLCDisp.c: 163:             lcd_wstring("2");
+[e ( _lcd_wstring (1 :s 17C ]
+"164
+[; ;LabLCDisp.c: 164:             break;
+[e $U 162  ]
+"165
+[; ;LabLCDisp.c: 165:         case 3:
+[e :U 167 ]
+"166
+[; ;LabLCDisp.c: 166:             lcd_wstring("3");
+[e ( _lcd_wstring (1 :s 18C ]
+"167
+[; ;LabLCDisp.c: 167:             break;
+[e $U 162  ]
+"168
+[; ;LabLCDisp.c: 168:         case 4:
+[e :U 168 ]
+"169
+[; ;LabLCDisp.c: 169:             lcd_wstring("4");
+[e ( _lcd_wstring (1 :s 19C ]
+"170
+[; ;LabLCDisp.c: 170:             break;
+[e $U 162  ]
+"171
+[; ;LabLCDisp.c: 171:         case 5:
+[e :U 169 ]
+"172
+[; ;LabLCDisp.c: 172:             lcd_wstring("5");
+[e ( _lcd_wstring (1 :s 20C ]
+"173
+[; ;LabLCDisp.c: 173:             break;
+[e $U 162  ]
+"174
+[; ;LabLCDisp.c: 174:         case 6:
+[e :U 170 ]
+"175
+[; ;LabLCDisp.c: 175:             lcd_wstring("6");
+[e ( _lcd_wstring (1 :s 21C ]
+"176
+[; ;LabLCDisp.c: 176:             break;
+[e $U 162  ]
+"177
+[; ;LabLCDisp.c: 177:         case 7:
+[e :U 171 ]
+"178
+[; ;LabLCDisp.c: 178:             lcd_wstring("7");
+[e ( _lcd_wstring (1 :s 22C ]
+"179
+[; ;LabLCDisp.c: 179:             break;
+[e $U 162  ]
+"180
+[; ;LabLCDisp.c: 180:         case 8:
+[e :U 172 ]
+"181
+[; ;LabLCDisp.c: 181:             lcd_wstring("8");
+[e ( _lcd_wstring (1 :s 23C ]
+"182
+[; ;LabLCDisp.c: 182:             break;
+[e $U 162  ]
+"183
+[; ;LabLCDisp.c: 183:         case 9:
+[e :U 173 ]
+"184
+[; ;LabLCDisp.c: 184:             lcd_wstring("9");
+[e ( _lcd_wstring (1 :s 24C ]
+"185
+[; ;LabLCDisp.c: 185:             break;
+[e $U 162  ]
+"186
+[; ;LabLCDisp.c: 186:     }
+}
+[e $U 162  ]
+[e :U 163 ]
+[e [\ _dec1 , $ -> 0 `i 164
+ , $ -> 1 `i 165
+ , $ -> 2 `i 166
+ , $ -> 3 `i 167
+ , $ -> 4 `i 168
+ , $ -> 5 `i 169
+ , $ -> 6 `i 170
+ , $ -> 7 `i 171
+ , $ -> 8 `i 172
+ , $ -> 9 `i 173
+ 162 ]
+[e :U 162 ]
+"187
+[; ;LabLCDisp.c: 187:     switch (dec2){
+[e $U 175  ]
+{
+"188
+[; ;LabLCDisp.c: 188:         case 0:
+[e :U 176 ]
+"189
+[; ;LabLCDisp.c: 189:             lcd_wstring("0");
+[e ( _lcd_wstring (1 :s 25C ]
+"190
+[; ;LabLCDisp.c: 190:             break;
+[e $U 174  ]
+"191
+[; ;LabLCDisp.c: 191:         case 1:
+[e :U 177 ]
+"192
+[; ;LabLCDisp.c: 192:             lcd_wstring("1");
+[e ( _lcd_wstring (1 :s 26C ]
+"193
+[; ;LabLCDisp.c: 193:             break;
+[e $U 174  ]
+"194
+[; ;LabLCDisp.c: 194:         case 2:
+[e :U 178 ]
+"195
+[; ;LabLCDisp.c: 195:             lcd_wstring("2");
+[e ( _lcd_wstring (1 :s 27C ]
+"196
+[; ;LabLCDisp.c: 196:             break;
+[e $U 174  ]
+"197
+[; ;LabLCDisp.c: 197:         case 3:
+[e :U 179 ]
+"198
+[; ;LabLCDisp.c: 198:             lcd_wstring("3");
+[e ( _lcd_wstring (1 :s 28C ]
+"199
+[; ;LabLCDisp.c: 199:             break;
+[e $U 174  ]
+"200
+[; ;LabLCDisp.c: 200:         case 4:
+[e :U 180 ]
+"201
+[; ;LabLCDisp.c: 201:             lcd_wstring("4");
+[e ( _lcd_wstring (1 :s 29C ]
+"202
+[; ;LabLCDisp.c: 202:             break;
+[e $U 174  ]
+"203
+[; ;LabLCDisp.c: 203:         case 5:
+[e :U 181 ]
+"204
+[; ;LabLCDisp.c: 204:             lcd_wstring("5");
+[e ( _lcd_wstring (1 :s 30C ]
+"205
+[; ;LabLCDisp.c: 205:             break;
+[e $U 174  ]
+"206
+[; ;LabLCDisp.c: 206:         case 6:
+[e :U 182 ]
+"207
+[; ;LabLCDisp.c: 207:             lcd_wstring("6");
+[e ( _lcd_wstring (1 :s 31C ]
+"208
+[; ;LabLCDisp.c: 208:             break;
+[e $U 174  ]
+"209
+[; ;LabLCDisp.c: 209:         case 7:
+[e :U 183 ]
+"210
+[; ;LabLCDisp.c: 210:             lcd_wstring("7");
+[e ( _lcd_wstring (1 :s 32C ]
+"211
+[; ;LabLCDisp.c: 211:             break;
+[e $U 174  ]
+"212
+[; ;LabLCDisp.c: 212:         case 8:
+[e :U 184 ]
+"213
+[; ;LabLCDisp.c: 213:             lcd_wstring("8");
+[e ( _lcd_wstring (1 :s 33C ]
+"214
+[; ;LabLCDisp.c: 214:             break;
+[e $U 174  ]
+"215
+[; ;LabLCDisp.c: 215:         case 9:
+[e :U 185 ]
+"216
+[; ;LabLCDisp.c: 216:             lcd_wstring("9");
+[e ( _lcd_wstring (1 :s 34C ]
+"217
+[; ;LabLCDisp.c: 217:             break;
+[e $U 174  ]
+"218
+[; ;LabLCDisp.c: 218:     }
+}
+[e $U 174  ]
+[e :U 175 ]
+[e [\ _dec2 , $ -> 0 `i 176
+ , $ -> 1 `i 177
+ , $ -> 2 `i 178
+ , $ -> 3 `i 179
+ , $ -> 4 `i 180
+ , $ -> 5 `i 181
+ , $ -> 6 `i 182
+ , $ -> 7 `i 183
+ , $ -> 8 `i 184
+ , $ -> 9 `i 185
+ 174 ]
+[e :U 174 ]
+"219
+[; ;LabLCDisp.c: 219:     lcd_wstring("V");
+[e ( _lcd_wstring (1 :s 35C ]
+"220
+[; ;LabLCDisp.c: 220:     return;
+[e $UE 149  ]
+"221
+[; ;LabLCDisp.c: 221: }
+[e :UE 149 ]
+}
+"223
+[; ;LabLCDisp.c: 223: void dispval2(float dataf){
+[v _dispval2 `(v ~T0 @X0 1 ef1`f ]
+{
+[e :U _dispval2 ]
+[v _dataf `f ~T0 @X0 1 r1 ]
+[f ]
+"224
+[; ;LabLCDisp.c: 224:     int vals;
+[v _vals `i ~T0 @X0 1 a ]
+"225
+[; ;LabLCDisp.c: 225:     int dec2;
+[v _dec2 `i ~T0 @X0 1 a ]
+"226
+[; ;LabLCDisp.c: 226:     int dec1;
+[v _dec1 `i ~T0 @X0 1 a ]
+"227
+[; ;LabLCDisp.c: 227:     int ent;
+[v _ent `i ~T0 @X0 1 a ]
+"228
+[; ;LabLCDisp.c: 228:     vals = dataf*100.0f;
+[e = _vals -> * _dataf -> .100.0 `f `i ]
+"229
+[; ;LabLCDisp.c: 229:     vals = vals/1;
+[e = _vals / _vals -> 1 `i ]
+"230
+[; ;LabLCDisp.c: 230:     dec2 = vals%10;
+[e = _dec2 % _vals -> 10 `i ]
+"231
+[; ;LabLCDisp.c: 231:     vals = vals/10;
+[e = _vals / _vals -> 10 `i ]
+"232
+[; ;LabLCDisp.c: 232:     dec1 = vals%10;
+[e = _dec1 % _vals -> 10 `i ]
+"233
+[; ;LabLCDisp.c: 233:     ent = vals/10;
+[e = _ent / _vals -> 10 `i ]
+"234
+[; ;LabLCDisp.c: 234:     switch (ent){
+[e $U 188  ]
+{
+"235
+[; ;LabLCDisp.c: 235:         case 0:
+[e :U 189 ]
+"236
+[; ;LabLCDisp.c: 236:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"237
+[; ;LabLCDisp.c: 237:             lcd_wstring("0");
+[e ( _lcd_wstring (1 :s 36C ]
+"238
+[; ;LabLCDisp.c: 238:             break;
+[e $U 187  ]
+"239
+[; ;LabLCDisp.c: 239:         case 1:
+[e :U 190 ]
+"240
+[; ;LabLCDisp.c: 240:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"241
+[; ;LabLCDisp.c: 241:             lcd_wstring("1");
+[e ( _lcd_wstring (1 :s 37C ]
+"242
+[; ;LabLCDisp.c: 242:             break;
+[e $U 187  ]
+"243
+[; ;LabLCDisp.c: 243:         case 2:
+[e :U 191 ]
+"244
+[; ;LabLCDisp.c: 244:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"245
+[; ;LabLCDisp.c: 245:             lcd_wstring("2");
+[e ( _lcd_wstring (1 :s 38C ]
+"246
+[; ;LabLCDisp.c: 246:             break;
+[e $U 187  ]
+"247
+[; ;LabLCDisp.c: 247:         case 3:
+[e :U 192 ]
+"248
+[; ;LabLCDisp.c: 248:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"249
+[; ;LabLCDisp.c: 249:             lcd_wstring("3");
+[e ( _lcd_wstring (1 :s 39C ]
+"250
+[; ;LabLCDisp.c: 250:             break;
+[e $U 187  ]
+"251
+[; ;LabLCDisp.c: 251:         case 4:
+[e :U 193 ]
+"252
+[; ;LabLCDisp.c: 252:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"253
+[; ;LabLCDisp.c: 253:             lcd_wstring("4");
+[e ( _lcd_wstring (1 :s 40C ]
+"254
+[; ;LabLCDisp.c: 254:             break;
+[e $U 187  ]
+"255
+[; ;LabLCDisp.c: 255:         case 5:
+[e :U 194 ]
+"256
+[; ;LabLCDisp.c: 256:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"257
+[; ;LabLCDisp.c: 257:             lcd_wstring("5");
+[e ( _lcd_wstring (1 :s 41C ]
+"258
+[; ;LabLCDisp.c: 258:             break;
+[e $U 187  ]
+"259
+[; ;LabLCDisp.c: 259:         case 6:
+[e :U 195 ]
+"260
+[; ;LabLCDisp.c: 260:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"261
+[; ;LabLCDisp.c: 261:             lcd_wstring("6");
+[e ( _lcd_wstring (1 :s 42C ]
+"262
+[; ;LabLCDisp.c: 262:             break;
+[e $U 187  ]
+"263
+[; ;LabLCDisp.c: 263:         case 7:
+[e :U 196 ]
+"264
+[; ;LabLCDisp.c: 264:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"265
+[; ;LabLCDisp.c: 265:             lcd_wstring("7");
+[e ( _lcd_wstring (1 :s 43C ]
+"266
+[; ;LabLCDisp.c: 266:             break;
+[e $U 187  ]
+"267
+[; ;LabLCDisp.c: 267:         case 8:
+[e :U 197 ]
+"268
+[; ;LabLCDisp.c: 268:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"269
+[; ;LabLCDisp.c: 269:             lcd_wstring("8");
+[e ( _lcd_wstring (1 :s 44C ]
+"270
+[; ;LabLCDisp.c: 270:             break;
+[e $U 187  ]
+"271
+[; ;LabLCDisp.c: 271:         case 9:
+[e :U 198 ]
+"272
+[; ;LabLCDisp.c: 272:             lcd_cursor_set(2,7);
+[e ( _lcd_cursor_set (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"273
+[; ;LabLCDisp.c: 273:             lcd_wstring("9");
+[e ( _lcd_wstring (1 :s 45C ]
+"274
+[; ;LabLCDisp.c: 274:             break;
+[e $U 187  ]
+"275
+[; ;LabLCDisp.c: 275:     }
+}
+[e $U 187  ]
+[e :U 188 ]
+[e [\ _ent , $ -> 0 `i 189
+ , $ -> 1 `i 190
+ , $ -> 2 `i 191
+ , $ -> 3 `i 192
+ , $ -> 4 `i 193
+ , $ -> 5 `i 194
+ , $ -> 6 `i 195
+ , $ -> 7 `i 196
+ , $ -> 8 `i 197
+ , $ -> 9 `i 198
+ 187 ]
+[e :U 187 ]
+"276
+[; ;LabLCDisp.c: 276:     lcd_wstring(".");
+[e ( _lcd_wstring (1 :s 46C ]
+"277
+[; ;LabLCDisp.c: 277:     switch (dec1){
+[e $U 200  ]
+{
+"278
+[; ;LabLCDisp.c: 278:         case 0:
+[e :U 201 ]
+"279
+[; ;LabLCDisp.c: 279:             lcd_wstring("0");
+[e ( _lcd_wstring (1 :s 47C ]
+"280
+[; ;LabLCDisp.c: 280:             break;
+[e $U 199  ]
+"281
+[; ;LabLCDisp.c: 281:         case 1:
+[e :U 202 ]
+"282
+[; ;LabLCDisp.c: 282:             lcd_wstring("1");
+[e ( _lcd_wstring (1 :s 48C ]
+"283
+[; ;LabLCDisp.c: 283:             break;
+[e $U 199  ]
+"284
+[; ;LabLCDisp.c: 284:         case 2:
+[e :U 203 ]
+"285
+[; ;LabLCDisp.c: 285:             lcd_wstring("2");
+[e ( _lcd_wstring (1 :s 49C ]
+"286
+[; ;LabLCDisp.c: 286:             break;
+[e $U 199  ]
+"287
+[; ;LabLCDisp.c: 287:         case 3:
+[e :U 204 ]
+"288
+[; ;LabLCDisp.c: 288:             lcd_wstring("3");
+[e ( _lcd_wstring (1 :s 50C ]
+"289
+[; ;LabLCDisp.c: 289:             break;
+[e $U 199  ]
+"290
+[; ;LabLCDisp.c: 290:         case 4:
+[e :U 205 ]
+"291
+[; ;LabLCDisp.c: 291:             lcd_wstring("4");
+[e ( _lcd_wstring (1 :s 51C ]
+"292
+[; ;LabLCDisp.c: 292:             break;
+[e $U 199  ]
+"293
+[; ;LabLCDisp.c: 293:         case 5:
+[e :U 206 ]
+"294
+[; ;LabLCDisp.c: 294:             lcd_wstring("5");
+[e ( _lcd_wstring (1 :s 52C ]
+"295
+[; ;LabLCDisp.c: 295:             break;
+[e $U 199  ]
+"296
+[; ;LabLCDisp.c: 296:         case 6:
+[e :U 207 ]
+"297
+[; ;LabLCDisp.c: 297:             lcd_wstring("6");
+[e ( _lcd_wstring (1 :s 53C ]
+"298
+[; ;LabLCDisp.c: 298:             break;
+[e $U 199  ]
+"299
+[; ;LabLCDisp.c: 299:         case 7:
+[e :U 208 ]
+"300
+[; ;LabLCDisp.c: 300:             lcd_wstring("7");
+[e ( _lcd_wstring (1 :s 54C ]
+"301
+[; ;LabLCDisp.c: 301:             break;
+[e $U 199  ]
+"302
+[; ;LabLCDisp.c: 302:         case 8:
+[e :U 209 ]
+"303
+[; ;LabLCDisp.c: 303:             lcd_wstring("8");
+[e ( _lcd_wstring (1 :s 55C ]
+"304
+[; ;LabLCDisp.c: 304:             break;
+[e $U 199  ]
+"305
+[; ;LabLCDisp.c: 305:         case 9:
+[e :U 210 ]
+"306
+[; ;LabLCDisp.c: 306:             lcd_wstring("9");
+[e ( _lcd_wstring (1 :s 56C ]
+"307
+[; ;LabLCDisp.c: 307:             break;
+[e $U 199  ]
+"308
+[; ;LabLCDisp.c: 308:     }
+}
+[e $U 199  ]
+[e :U 200 ]
+[e [\ _dec1 , $ -> 0 `i 201
+ , $ -> 1 `i 202
+ , $ -> 2 `i 203
+ , $ -> 3 `i 204
+ , $ -> 4 `i 205
+ , $ -> 5 `i 206
+ , $ -> 6 `i 207
+ , $ -> 7 `i 208
+ , $ -> 8 `i 209
+ , $ -> 9 `i 210
+ 199 ]
+[e :U 199 ]
+"309
+[; ;LabLCDisp.c: 309:     switch (dec2){
+[e $U 212  ]
+{
+"310
+[; ;LabLCDisp.c: 310:         case 0:
+[e :U 213 ]
+"311
+[; ;LabLCDisp.c: 311:             lcd_wstring("0");
+[e ( _lcd_wstring (1 :s 57C ]
+"312
+[; ;LabLCDisp.c: 312:             break;
+[e $U 211  ]
+"313
+[; ;LabLCDisp.c: 313:         case 1:
+[e :U 214 ]
+"314
+[; ;LabLCDisp.c: 314:             lcd_wstring("1");
+[e ( _lcd_wstring (1 :s 58C ]
+"315
+[; ;LabLCDisp.c: 315:             break;
+[e $U 211  ]
+"316
+[; ;LabLCDisp.c: 316:         case 2:
+[e :U 215 ]
+"317
+[; ;LabLCDisp.c: 317:             lcd_wstring("2");
+[e ( _lcd_wstring (1 :s 59C ]
+"318
+[; ;LabLCDisp.c: 318:             break;
+[e $U 211  ]
+"319
+[; ;LabLCDisp.c: 319:         case 3:
+[e :U 216 ]
+"320
+[; ;LabLCDisp.c: 320:             lcd_wstring("3");
+[e ( _lcd_wstring (1 :s 60C ]
+"321
+[; ;LabLCDisp.c: 321:             break;
+[e $U 211  ]
+"322
+[; ;LabLCDisp.c: 322:         case 4:
+[e :U 217 ]
+"323
+[; ;LabLCDisp.c: 323:             lcd_wstring("4");
+[e ( _lcd_wstring (1 :s 61C ]
+"324
+[; ;LabLCDisp.c: 324:             break;
+[e $U 211  ]
+"325
+[; ;LabLCDisp.c: 325:         case 5:
+[e :U 218 ]
+"326
+[; ;LabLCDisp.c: 326:             lcd_wstring("5");
+[e ( _lcd_wstring (1 :s 62C ]
+"327
+[; ;LabLCDisp.c: 327:             break;
+[e $U 211  ]
+"328
+[; ;LabLCDisp.c: 328:         case 6:
+[e :U 219 ]
+"329
+[; ;LabLCDisp.c: 329:             lcd_wstring("6");
+[e ( _lcd_wstring (1 :s 63C ]
+"330
+[; ;LabLCDisp.c: 330:             break;
+[e $U 211  ]
+"331
+[; ;LabLCDisp.c: 331:         case 7:
+[e :U 220 ]
+"332
+[; ;LabLCDisp.c: 332:             lcd_wstring("7");
+[e ( _lcd_wstring (1 :s 64C ]
+"333
+[; ;LabLCDisp.c: 333:             break;
+[e $U 211  ]
+"334
+[; ;LabLCDisp.c: 334:         case 8:
+[e :U 221 ]
+"335
+[; ;LabLCDisp.c: 335:             lcd_wstring("8");
+[e ( _lcd_wstring (1 :s 65C ]
+"336
+[; ;LabLCDisp.c: 336:             break;
+[e $U 211  ]
+"337
+[; ;LabLCDisp.c: 337:         case 9:
+[e :U 222 ]
+"338
+[; ;LabLCDisp.c: 338:             lcd_wstring("9");
+[e ( _lcd_wstring (1 :s 66C ]
+"339
+[; ;LabLCDisp.c: 339:             break;
+[e $U 211  ]
+"340
+[; ;LabLCDisp.c: 340:     }
+}
+[e $U 211  ]
+[e :U 212 ]
+[e [\ _dec2 , $ -> 0 `i 213
+ , $ -> 1 `i 214
+ , $ -> 2 `i 215
+ , $ -> 3 `i 216
+ , $ -> 4 `i 217
+ , $ -> 5 `i 218
+ , $ -> 6 `i 219
+ , $ -> 7 `i 220
+ , $ -> 8 `i 221
+ , $ -> 9 `i 222
+ 211 ]
+[e :U 211 ]
+"341
+[; ;LabLCDisp.c: 341:     lcd_wstring("V");
+[e ( _lcd_wstring (1 :s 67C ]
+"342
+[; ;LabLCDisp.c: 342:     return;
+[e $UE 186  ]
+"343
+[; ;LabLCDisp.c: 343: }
+[e :UE 186 ]
+}
+[a 35C 86 0 ]
+[a 67C 86 0 ]
+[a 3C 67 79 78 84 0 ]
+[a 13C 57 0 ]
+[a 24C 57 0 ]
+[a 34C 57 0 ]
+[a 45C 57 0 ]
+[a 56C 57 0 ]
+[a 66C 57 0 ]
+[a 12C 56 0 ]
+[a 23C 56 0 ]
+[a 33C 56 0 ]
+[a 44C 56 0 ]
+[a 55C 56 0 ]
+[a 65C 56 0 ]
+[a 11C 55 0 ]
+[a 22C 55 0 ]
+[a 32C 55 0 ]
+[a 43C 55 0 ]
+[a 54C 55 0 ]
+[a 64C 55 0 ]
+[a 10C 54 0 ]
+[a 21C 54 0 ]
+[a 31C 54 0 ]
+[a 42C 54 0 ]
+[a 53C 54 0 ]
+[a 63C 54 0 ]
+[a 9C 53 0 ]
+[a 20C 53 0 ]
+[a 30C 53 0 ]
+[a 41C 53 0 ]
+[a 52C 53 0 ]
+[a 62C 53 0 ]
+[a 8C 52 0 ]
+[a 19C 52 0 ]
+[a 29C 52 0 ]
+[a 40C 52 0 ]
+[a 51C 52 0 ]
+[a 61C 52 0 ]
+[a 7C 51 0 ]
+[a 18C 51 0 ]
+[a 28C 51 0 ]
+[a 39C 51 0 ]
+[a 50C 51 0 ]
+[a 60C 51 0 ]
+[a 2C 83 80 50 0 ]
+[a 6C 50 0 ]
+[a 17C 50 0 ]
+[a 27C 50 0 ]
+[a 38C 50 0 ]
+[a 49C 50 0 ]
+[a 59C 50 0 ]
+[a 1C 83 80 49 0 ]
+[a 5C 49 0 ]
+[a 16C 49 0 ]
+[a 26C 49 0 ]
+[a 37C 49 0 ]
+[a 48C 49 0 ]
+[a 58C 49 0 ]
+[a 4C 48 0 ]
+[a 15C 48 0 ]
+[a 25C 48 0 ]
+[a 36C 48 0 ]
+[a 47C 48 0 ]
+[a 57C 48 0 ]
+[a 14C 46 0 ]
+[a 46C 46 0 ]

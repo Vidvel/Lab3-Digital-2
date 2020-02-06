@@ -2648,105 +2648,6 @@ typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
 # 33 "LabLCDisp.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__size_t.h" 1 3
-
-
-
-typedef unsigned size_t;
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__null.h" 1 3
-# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdarg.h" 1 3
-
-
-
-
-
-
-typedef void * va_list[1];
-
-#pragma intrinsic(__va_start)
-extern void * __va_start(void);
-
-#pragma intrinsic(__va_arg)
-extern void * __va_arg(void *, ...);
-# 11 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
-# 43 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
-struct __prbuf
-{
- char * ptr;
- void (* func)(char);
-};
-# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 1 3
-
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 1 3
-# 29 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 3
-extern int errno;
-# 8 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 2 3
-
-
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-
-
-extern char * cgets(char *);
-extern void cputs(const char *);
-# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-extern int cprintf(char *, ...);
-#pragma printf_check(cprintf)
-
-
-
-extern int _doprnt(struct __prbuf *, const register char *, register va_list);
-# 180 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
-#pragma printf_check(vprintf) const
-#pragma printf_check(vsprintf) const
-
-extern char * gets(char *);
-extern int puts(const char *);
-extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
-extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
-extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
-extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
-extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
-extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
-
-#pragma printf_check(printf) const
-#pragma printf_check(sprintf) const
-extern int sprintf(char *, const char *, ...);
-extern int printf(const char *, ...);
-# 34 "LabLCDisp.c" 2
-
 # 1 "./LCDISPLIBLB3.h" 1
 # 11 "./LCDISPLIBLB3.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
@@ -2763,7 +2664,7 @@ void lcd_writechar(char m);
 void lcd_char(char iord);
 void lcd_wstring(char *a);
 void lcd_clear(void);
-# 35 "LabLCDisp.c" 2
+# 34 "LabLCDisp.c" 2
 
 # 1 "./adclib.h" 1
 # 11 "./adclib.h"
@@ -2771,18 +2672,33 @@ void lcd_clear(void);
 # 11 "./adclib.h" 2
 
 void initADC(char var1);
-# 36 "LabLCDisp.c" 2
+# 35 "LabLCDisp.c" 2
 
 
 
 
+char ADCval1 = 0;
+char ADCval2 = 0;
+char ADCchannel = 0;
 
-char potval = 0;
+void dispval1(float dataf);
+void dispval2(float dataf);
 
 void __attribute__((picinterrupt(("")))) ISR(void){
     if (PIR1bits.ADIF == 1){
         PIR1bits.ADIF = 0;
-        potval = ADRESH;
+        switch (ADCchannel){
+            case 0:
+                ADCval1 = ADRESH;
+                ADCON0bits.CHS = 0b1100;
+                ADCchannel = 1;
+                break;
+            case 1:
+                ADCval2 = ADRESH;
+                ADCON0bits.CHS = 0b1101;
+                ADCchannel = 0;
+                break;
+        }
         ADCON0bits.GO = 1;
     }
     else
@@ -2800,76 +2716,269 @@ void main(void) {
     ADCON1bits.VCFG1 = 0;
     ADCON0 = 0b11000001;
     INTCON = 0b11000000;
-    float valf;
+    float valf1;
+    float valf2;
     lcd_start();
     char ancha = 13;
     initADC(ancha);
-    lcd_cursor_set(1,5);
-    lcd_wstring("Aiuda");
+    lcd_cursor_set(1,2);
+    lcd_wstring("SP1");
+
+    lcd_cursor_set(1,8);
+    lcd_wstring("SP2");
+
+    lcd_cursor_set(1,13);
+    lcd_wstring("CONT");
 
     while(1){
-        valf = (potval/51.0f);
-        char text [16];
-        sprintf(text, "%.2f", valf);
-        lcd_cursor_set(2,1);
-        lcd_wstring(text);
-        lcd_cursor_set(2,5);
-        lcd_wstring("V");
+        valf1 = (ADCval1/51.0f);
+        valf2 = (ADCval2/51.0f);
+        dispval1(valf1);
+        dispval2(valf2);
     }
     return;
 }
 
-char hex_to_lcd (char var1){
-    char out;
-    switch (var1){
-        default:
-            out='-';
+void dispval1(float dataf){
+    int vals;
+    int dec2;
+    int dec1;
+    int ent;
+    vals = dataf*100.0f;
+    vals = vals/1;
+    dec2 = vals%10;
+    vals = vals/10;
+    dec1 = vals%10;
+    ent = vals/10;
+    switch (ent){
+        case 0:
+            lcd_cursor_set(2,1);
+            lcd_wstring("0");
             break;
         case 1:
-            out = '1';
+            lcd_cursor_set(2,1);
+            lcd_wstring("1");
             break;
         case 2:
-            out = '2';
+            lcd_cursor_set(2,1);
+            lcd_wstring("2");
             break;
         case 3:
-            out = '3';
+            lcd_cursor_set(2,1);
+            lcd_wstring("3");
             break;
         case 4:
-            out = '4';
+            lcd_cursor_set(2,1);
+            lcd_wstring("4");
             break;
         case 5:
-            out = '5';
+            lcd_cursor_set(2,1);
+            lcd_wstring("5");
             break;
         case 6:
-            out = '6';
+            lcd_cursor_set(2,1);
+            lcd_wstring("6");
             break;
         case 7:
-            out = '7';
+            lcd_cursor_set(2,1);
+            lcd_wstring("7");
             break;
         case 8:
-            out = '8';
+            lcd_cursor_set(2,1);
+            lcd_wstring("8");
             break;
         case 9:
-            out = '9';
-            break;
-        case 10:
-            out = 'A';
-            break;
-        case 11:
-            out = 'B';
-            break;
-        case 12:
-            out = 'C';
-            break;
-        case 13:
-            out = 'D';
-            break;
-        case 14:
-            out = 'E';
-            break;
-        case 15:
-            out = 'F';
+            lcd_cursor_set(2,1);
+            lcd_wstring("9");
             break;
     }
-    return out;
+    lcd_wstring(".");
+    switch (dec1){
+        case 0:
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_wstring("4");
+            break;
+        case 5:
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_wstring("9");
+            break;
+    }
+    switch (dec2){
+        case 0:
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_wstring("4");
+            break;
+        case 5:
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_wstring("9");
+            break;
+    }
+    lcd_wstring("V");
+    return;
+}
+
+void dispval2(float dataf){
+    int vals;
+    int dec2;
+    int dec1;
+    int ent;
+    vals = dataf*100.0f;
+    vals = vals/1;
+    dec2 = vals%10;
+    vals = vals/10;
+    dec1 = vals%10;
+    ent = vals/10;
+    switch (ent){
+        case 0:
+            lcd_cursor_set(2,7);
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_cursor_set(2,7);
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_cursor_set(2,7);
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_cursor_set(2,7);
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_cursor_set(2,7);
+            lcd_wstring("4");
+            break;
+        case 5:
+            lcd_cursor_set(2,7);
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_cursor_set(2,7);
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_cursor_set(2,7);
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_cursor_set(2,7);
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_cursor_set(2,7);
+            lcd_wstring("9");
+            break;
+    }
+    lcd_wstring(".");
+    switch (dec1){
+        case 0:
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_wstring("4");
+            break;
+        case 5:
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_wstring("9");
+            break;
+    }
+    switch (dec2){
+        case 0:
+            lcd_wstring("0");
+            break;
+        case 1:
+            lcd_wstring("1");
+            break;
+        case 2:
+            lcd_wstring("2");
+            break;
+        case 3:
+            lcd_wstring("3");
+            break;
+        case 4:
+            lcd_wstring("4");
+            break;
+        case 5:
+            lcd_wstring("5");
+            break;
+        case 6:
+            lcd_wstring("6");
+            break;
+        case 7:
+            lcd_wstring("7");
+            break;
+        case 8:
+            lcd_wstring("8");
+            break;
+        case 9:
+            lcd_wstring("9");
+            break;
+    }
+    lcd_wstring("V");
+    return;
 }
