@@ -2519,11 +2519,6 @@ void usart_setup(void) {
 
     TXSTAbits.TX9 = 0;
 
-
-
-
-
-
     RCSTAbits.SPEN = 1;
     RCSTAbits.RX9 = 0;
     RCSTAbits.CREN = 1;

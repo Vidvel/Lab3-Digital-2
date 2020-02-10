@@ -2689,7 +2689,7 @@ char ADCval1 = 0;
 char ADCval2 = 0;
 char ADCchannel = 0;
 char send = 0;
-char contador = 155;
+char contador = 0;
 char recived = 0;
 
 void dispval1(float dataf);
@@ -2762,18 +2762,16 @@ void main(void) {
         }
         if (recived == 0x2B){
             contador++;
-            cntdisp(contador);
             recived = 0;
         }
         else if (recived == 0x2D){
             contador--;
-            cntdisp(contador);
             recived = 0;
         }
         else{
             __asm("nop");
         }
-
+        cntdisp(contador);
     }
     return;
 }

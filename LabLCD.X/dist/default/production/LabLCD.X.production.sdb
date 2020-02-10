@@ -29,11 +29,11 @@
 [v _ISR ISR `II(v  1 e 1 0 ]
 "107
 [v _main main `(v  1 e 1 0 ]
-"165
+"163
 [v _cntdisp cntdisp `(v  1 e 1 0 ]
-"273
+"271
 [v _dispval1 dispval1 `(v  1 e 1 0 ]
-"395
+"393
 [v _dispval2 dispval2 `(v  1 e 1 0 ]
 "20 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LCDISPLIBLB3.c
 [v _lcd_databits lcd_databits `(v  1 e 1 0 ]
@@ -53,11 +53,11 @@
 [v _lcd_wstring lcd_wstring `(v  1 e 1 0 ]
 "12 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\usartlib.c
 [v _usart_setup usart_setup `(v  1 e 1 0 ]
-"42
+"37
 [v _UART_Write UART_Write `(v  1 e 1 0 ]
-"47
+"42
 [v _UART_Read UART_Read `(uc  1 e 1 0 ]
-"56
+"51
 [v _UART_Data_Ready UART_Data_Ready `(uc  1 e 1 0 ]
 "459 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
@@ -245,12 +245,12 @@
 [v main@valf2 valf2 `f  1 a 4 65 ]
 "118
 [v main@valf1 valf1 `f  1 a 4 61 ]
-"163
+"161
 } 0
 "12 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\usartlib.c
 [v _usart_setup usart_setup `(v  1 e 1 0 ]
 {
-"40
+"35
 } 0
 "109 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LCDISPLIBLB3.c
 [v _lcd_start lcd_start `(v  1 e 1 0 ]
@@ -281,35 +281,35 @@
 [v initADC@var1 var1 `uc  1 a 1 0 ]
 "68
 } 0
-"395 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+"393 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
 [v _dispval2 dispval2 `(v  1 e 1 0 ]
 {
-"396
+"394
 [v dispval2@vals vals `i  1 a 2 55 ]
-"399
-[v dispval2@ent ent `i  1 a 2 53 ]
-"398
-[v dispval2@dec1 dec1 `i  1 a 2 51 ]
 "397
-[v dispval2@dec2 dec2 `i  1 a 2 49 ]
+[v dispval2@ent ent `i  1 a 2 53 ]
+"396
+[v dispval2@dec1 dec1 `i  1 a 2 51 ]
 "395
+[v dispval2@dec2 dec2 `i  1 a 2 49 ]
+"393
 [v dispval2@dataf dataf `f  1 p 4 44 ]
-"515
+"513
 } 0
-"273
+"271
 [v _dispval1 dispval1 `(v  1 e 1 0 ]
 {
-"274
+"272
 [v dispval1@vals vals `i  1 a 2 54 ]
-"277
-[v dispval1@ent ent `i  1 a 2 52 ]
-"276
-[v dispval1@dec1 dec1 `i  1 a 2 50 ]
 "275
-[v dispval1@dec2 dec2 `i  1 a 2 48 ]
+[v dispval1@ent ent `i  1 a 2 52 ]
+"274
+[v dispval1@dec1 dec1 `i  1 a 2 50 ]
 "273
+[v dispval1@dec2 dec2 `i  1 a 2 48 ]
+"271
 [v dispval1@dataf dataf `f  1 p 4 44 ]
-"393
+"391
 } 0
 "43 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\fltol.c
 [v ___fltol __fltol `(l  1 e 4 0 ]
@@ -360,23 +360,23 @@
 [v __Umul8_16@multiplier multiplier `uc  1 a 1 6 ]
 "60
 } 0
-"165 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+"163 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
 [v _cntdisp cntdisp `(v  1 e 1 0 ]
 {
 [v cntdisp@datac datac `uc  1 a 1 wreg ]
-"166
+"164
 [v cntdisp@vals vals `i  1 a 2 17 ]
-"169
-[v cntdisp@ent3 ent3 `i  1 a 2 14 ]
-"168
-[v cntdisp@ent2 ent2 `i  1 a 2 12 ]
 "167
-[v cntdisp@ent1 ent1 `i  1 a 2 10 ]
+[v cntdisp@ent3 ent3 `i  1 a 2 14 ]
+"166
+[v cntdisp@ent2 ent2 `i  1 a 2 12 ]
 "165
+[v cntdisp@ent1 ent1 `i  1 a 2 10 ]
+"163
 [v cntdisp@datac datac `uc  1 a 1 wreg ]
-"170
+"168
 [v cntdisp@datac datac `uc  1 a 1 16 ]
-"271
+"269
 } 0
 "151 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LCDISPLIBLB3.c
 [v _lcd_wstring lcd_wstring `(v  1 e 1 0 ]
@@ -487,25 +487,25 @@
 [v ___fldiv@b b `d  1 p 4 18 ]
 "185
 } 0
-"42 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\usartlib.c
+"37 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\usartlib.c
 [v _UART_Write UART_Write `(v  1 e 1 0 ]
 {
 [v UART_Write@data data `uc  1 a 1 wreg ]
 [v UART_Write@data data `uc  1 a 1 wreg ]
 [v UART_Write@data data `uc  1 a 1 5 ]
-"46
+"41
 } 0
-"47
+"42
 [v _UART_Read UART_Read `(uc  1 e 1 0 ]
 {
-"48
+"43
 [v UART_Read@intro intro `i  1 a 2 0 ]
-"54
+"49
 } 0
-"56
+"51
 [v _UART_Data_Ready UART_Data_Ready `(uc  1 e 1 0 ]
 {
-"59
+"54
 } 0
 "83 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
 [v _ISR ISR `II(v  1 e 1 0 ]

@@ -17,13 +17,8 @@ void usart_setup(void) {
     BAUDCTLbits.BRG16 = 0;
     BAUDCTLbits.ABDEN = 0;
     
-    TXSTAbits.TX9 = 0;/*
-    TXSTAbits.TXEN = 1;
-    TXSTAbits.SYNC = 0;
-    TXSTAbits.BRGH = 1;
-    PIE1bits.TXIE = 1;
-    
-    */
+    TXSTAbits.TX9 = 0;
+
     RCSTAbits.SPEN = 1;
     RCSTAbits.RX9 = 0;
     RCSTAbits.CREN = 1;
