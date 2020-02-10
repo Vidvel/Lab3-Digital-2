@@ -1,4 +1,4 @@
-# 1 "LabLCDisp.c"
+# 1 "usartlib.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,56 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "LabLCDisp.c" 2
-# 46 "LabLCDisp.c"
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
-# 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
-extern const char __xc8_OPTIM_SPEED;
-
-extern double __fpnormalize(double);
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\xc8debug.h" 1 3
-# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\xc8debug.h" 3
-#pragma intrinsic(__builtin_software_breakpoint)
-extern void __builtin_software_breakpoint(void);
-# 23 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic.h" 1 3
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\htc.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\htc.h" 2 3
-# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic.h" 2 3
+# 1 "usartlib.c" 2
 
 
 
@@ -63,9 +14,14 @@ extern void __builtin_software_breakpoint(void);
 
 
 
+# 1 "./usartlib.h" 1
+# 10 "./usartlib.h"
+void usart_setup(void);
+void UART_Write(char data);
+char UART_Read(void);
+char UART_Data_Ready(void);
+# 8 "usartlib.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic_chip_select.h" 1 3
-# 2703 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic_chip_select.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic16f887.h" 1 3
 # 44 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic16f887.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__at.h" 1 3
@@ -2477,7 +2433,46 @@ extern volatile __bit nW __attribute__((address(0x4A2)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x4A2)));
-# 2703 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic_chip_select.h" 2 3
+# 9 "usartlib.c" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
+# 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
+extern const char __xc8_OPTIM_SPEED;
+
+extern double __fpnormalize(double);
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\xc8debug.h" 1 3
+# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\xc8debug.h" 3
+#pragma intrinsic(__builtin_software_breakpoint)
+extern void __builtin_software_breakpoint(void);
+# 23 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic.h" 1 3
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\htc.h" 1 3
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\htc.h" 2 3
+# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic.h" 2 3
+
+
+
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic_chip_select.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic.h" 2 3
 # 30 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\pic.h" 3
 #pragma intrinsic(__nop)
@@ -2511,621 +2506,54 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 64 "LabLCDisp.c" 2
+# 10 "usartlib.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
 
+void usart_setup(void) {
 
+    SPBRG = 25 ;
 
+    BAUDCTLbits.SCKP = 0;
+    BAUDCTLbits.BRG16 = 0;
+    BAUDCTLbits.ABDEN = 0;
 
+    TXSTAbits.TX9 = 0;
 
 
-typedef signed int int16_t;
 
 
 
 
+    RCSTAbits.SPEN = 1;
+    RCSTAbits.RX9 = 0;
+    RCSTAbits.CREN = 1;
 
+    TXSTAbits.BRGH = 1;
+    SYNC = 0;
+    SPEN = 1;
+    TRISC7 = 1;
+    TRISC6 = 1;
+    CREN = 1;
+    TXEN = 1;
 
-
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-# 65 "LabLCDisp.c" 2
-
-# 1 "./LCDISPLIBLB3.h" 1
-# 11 "./LCDISPLIBLB3.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
-# 11 "./LCDISPLIBLB3.h" 2
-# 58 "./LCDISPLIBLB3.h"
-void lcd_start(void);
-void lcd_databits(char iord);
-void lcd_stinst5(char iord);
-void lcd_stinst4(char iord);
-void lcd_stinst1(char iord);
-void lcd_inst(char iord);
-void lcd_cursor_set(char x, char y);
-void lcd_writechar(char m);
-void lcd_char(char iord);
-void lcd_wstring(char *a);
-void lcd_clear(void);
-# 66 "LabLCDisp.c" 2
-
-# 1 "./adclib.h" 1
-# 11 "./adclib.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
-# 11 "./adclib.h" 2
-
-void initADC(char var1);
-# 67 "LabLCDisp.c" 2
-
-# 1 "./usartlib.h" 1
-# 10 "./usartlib.h"
-void usart_setup(void);
-void UART_Write(char data);
-char UART_Read(void);
-char UART_Data_Ready(void);
-# 68 "LabLCDisp.c" 2
-
-
-
-
-char ADCval1 = 0;
-char ADCval2 = 0;
-char ADCchannel = 0;
-char send = 0;
-char contador = 155;
-char recived = 0;
-
-void dispval1(float dataf);
-void dispval2(float dataf);
-void cntdisp(char datac);
-
-void __attribute__((picinterrupt(("")))) ISR(void){
-    if (PIR1bits.ADIF == 1){
-        PIR1bits.ADIF = 0;
-        switch (ADCchannel){
-            case 0:
-                ADCval1 = ADRESH;
-                ADCON0bits.CHS = 0b1100;
-                ADCchannel = 1;
-                break;
-            case 1:
-                ADCval2 = ADRESH;
-                ADCON0bits.CHS = 0b1101;
-                ADCchannel = 0;
-                break;
-        }
-        ADCON0bits.GO = 1;
-    }
-    else if (PIR1bits.TXIF == 1) {
-        send = 1;
-    }
-    else
-        __asm("nop");
-}
-
-void main(void) {
-    TRISB = 0b100001;
-    ANSEL = 0;
-    ANSELH = 0b0010100;
-    TRISA = 0;
-    TRISD = 0;
-    ADCON1bits.ADFM = 1;
-    ADCON1bits.VCFG0 = 0;
-    ADCON1bits.VCFG1 = 0;
-    ADCON0 = 0b11000001;
-    INTCON = 0b11000000;
-    float valf1;
-    float valf2;
-    lcd_start();
-    char ancha = 13;
-    initADC(ancha);
-    usart_setup();
-    lcd_cursor_set(1,2);
-    lcd_wstring("SP1");
-
-    lcd_cursor_set(1,8);
-    lcd_wstring("SP2");
-
-    lcd_cursor_set(1,13);
-    lcd_wstring("CONT");
-
-    while(1){
-        UART_Write(ADCval1);
-        UART_Write(ADCval2);
-        valf1 = (ADCval1/51.0f);
-        valf2 = (ADCval2/51.0f);
-        dispval1(valf1);
-        dispval2(valf2);
-        if (UART_Data_Ready()){
-           recived = UART_Read();
-           RCSTAbits.CREN = 1;
-        }
-        else{
-            __asm("nop");
-        }
-        if (recived == 0x2B){
-            contador++;
-            cntdisp(contador);
-            recived = 0;
-        }
-        else if (recived == 0x2D){
-            contador--;
-            cntdisp(contador);
-            recived = 0;
-        }
-        else{
-            __asm("nop");
-        }
-
-    }
     return;
 }
 
-void cntdisp(char datac){
-    int vals;
-    int ent1;
-    int ent2;
-    int ent3;
-    ent3 = datac%10;
-    vals = datac/10;
-    ent2 = vals%10;
-    ent1 = vals/10;
-    lcd_cursor_set(2,13);
-    switch (ent1){
-        case 0:
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_wstring("9");
-            break;
-    }
-    switch (ent2){
-        case 0:
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_wstring("9");
-            break;
-    }
-    switch (ent3){
-        case 0:
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_wstring("9");
-            break;
-    }
+void UART_Write(char data)
+{
+  while(!TRMT);
+  TXREG = data;
+}
+char UART_Read(void){
+int intro;
+  while(!RCIF){
+      __asm("nop");
+  }
+  intro = RCREG;
+  return intro;
 }
 
-void dispval1(float dataf){
-    int vals;
-    int dec2;
-    int dec1;
-    int ent;
-    vals = dataf*100.0f;
-    vals = vals/1;
-    dec2 = vals%10;
-    vals = vals/10;
-    dec1 = vals%10;
-    ent = vals/10;
-    switch (ent){
-        case 0:
-            lcd_cursor_set(2,1);
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_cursor_set(2,1);
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_cursor_set(2,1);
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_cursor_set(2,1);
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_cursor_set(2,1);
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_cursor_set(2,1);
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_cursor_set(2,1);
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_cursor_set(2,1);
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_cursor_set(2,1);
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_cursor_set(2,1);
-            lcd_wstring("9");
-            break;
-    }
-    lcd_wstring(".");
-    switch (dec1){
-        case 0:
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_wstring("9");
-            break;
-    }
-    switch (dec2){
-        case 0:
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_wstring("9");
-            break;
-    }
-    lcd_wstring("V");
-    return;
-}
-
-void dispval2(float dataf){
-    int vals;
-    int dec2;
-    int dec1;
-    int ent;
-    vals = dataf*100.0f;
-    vals = vals/1;
-    dec2 = vals%10;
-    vals = vals/10;
-    dec1 = vals%10;
-    ent = vals/10;
-    switch (ent){
-        case 0:
-            lcd_cursor_set(2,7);
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_cursor_set(2,7);
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_cursor_set(2,7);
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_cursor_set(2,7);
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_cursor_set(2,7);
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_cursor_set(2,7);
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_cursor_set(2,7);
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_cursor_set(2,7);
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_cursor_set(2,7);
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_cursor_set(2,7);
-            lcd_wstring("9");
-            break;
-    }
-    lcd_wstring(".");
-    switch (dec1){
-        case 0:
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_wstring("9");
-            break;
-    }
-    switch (dec2){
-        case 0:
-            lcd_wstring("0");
-            break;
-        case 1:
-            lcd_wstring("1");
-            break;
-        case 2:
-            lcd_wstring("2");
-            break;
-        case 3:
-            lcd_wstring("3");
-            break;
-        case 4:
-            lcd_wstring("4");
-            break;
-        case 5:
-            lcd_wstring("5");
-            break;
-        case 6:
-            lcd_wstring("6");
-            break;
-        case 7:
-            lcd_wstring("7");
-            break;
-        case 8:
-            lcd_wstring("8");
-            break;
-        case 9:
-            lcd_wstring("9");
-            break;
-    }
-    lcd_wstring("V");
-    return;
+char UART_Data_Ready(void)
+{
+  return RCIF;
 }

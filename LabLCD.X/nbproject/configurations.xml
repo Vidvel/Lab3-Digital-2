@@ -8,6 +8,8 @@
       <itemPath>LCDISPLIBLB3.c</itemPath>
       <itemPath>adclib.c</itemPath>
       <itemPath>adclib.h</itemPath>
+      <itemPath>usartlib.h</itemPath>
+      <itemPath>usartlib.c</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

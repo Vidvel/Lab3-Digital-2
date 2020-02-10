@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/ProyectosDigitali2/Laboratorio3/Lab3-Digital-2/LabLCD.X/LCDISPLIBLB3.h</file>
+            <file>file:/C:/ProyectosDigitali2/Laboratorio3/Lab3-Digital-2/LabLCD.X/adclib.c</file>
+            <file>file:/C:/ProyectosDigitali2/Laboratorio3/Lab3-Digital-2/LabLCD.X/adclib.h</file>
+            <file>file:/C:/ProyectosDigitali2/Laboratorio3/Lab3-Digital-2/LabLCD.X/usartlib.h</file>
             <file>file:/C:/ProyectosDigitali2/Laboratorio3/Lab3-Digital-2/LabLCD.X/LabLCDisp.c</file>
-            <file>file:/C:/ProyectosDigitali2/Laboratorio3/Lab3-Digital-2/LabLCD.X/LCDISPLIBLB3.c</file>
+            <file>file:/C:/ProyectosDigitali2/Laboratorio3/Lab3-Digital-2/LabLCD.X/usartlib.c</file>
         </group>
     </open-files>
 </project-private>
