@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v2.10\pic\dat\en_msgs.txt \
   -cs -h+dist/default/production\LabLCD.X.production.sym \
   --cmf=dist/default/production\LabLCD.X.production.cmf -z -Q16F887 \
-  -oC:\Users\DAVIDV~1\AppData\Local\Temp\s12ek.2 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\DAVIDV~1\AppData\Local\Temp\suvs.2 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/LabLCD.X.production.map -E1 -ver=XC8 \
   --acfsm=1493 -ASTACK=0110h-016Fh -pstack=STACK -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -pfunctab=ENTRY -ACONFIG=02007h-02008h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=02000h-02003h -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h \
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
-  -DENTRY=2 -k C:\Users\DAVIDV~1\AppData\Local\Temp\s12ek.o \
+  -DENTRY=2 -k C:\Users\DAVIDV~1\AppData\Local\Temp\suvs.o \
   dist/default/production\LabLCD.X.production.o 
 
 Object code version is 3.11
@@ -28,7 +28,7 @@ Machine type is 16F887
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\DAVIDV~1\AppData\Local\Temp\s12ek.o
+C:\Users\DAVIDV~1\AppData\Local\Temp\suvs.o
                 end_init                              E        E        3        8       0
                 reset_vec                             0        0        3        0       0
                 config                             2007     2007        2     400E       0
@@ -555,7 +555,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 107 in file "LabLCDisp.c"
+		line 109 in file "LabLCDisp.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -750,7 +750,7 @@ Total ram usage:        3 bytes
 
  *************** function _dispval2 *****************
  Defined at:
-		line 393 in file "LabLCDisp.c"
+		line 395 in file "LabLCDisp.c"
  Parameters:    Size  Location     Type
   dataf           4   44[BANK0 ] float 
  Auto vars:     Size  Location     Type
@@ -788,7 +788,7 @@ Total ram usage:       13 bytes
 
  *************** function _dispval1 *****************
  Defined at:
-		line 271 in file "LabLCDisp.c"
+		line 273 in file "LabLCDisp.c"
  Parameters:    Size  Location     Type
   dataf           4   44[BANK0 ] float 
  Auto vars:     Size  Location     Type
@@ -928,7 +928,7 @@ Total ram usage:        9 bytes
 
  *************** function _cntdisp *****************
  Defined at:
-		line 163 in file "LabLCDisp.c"
+		line 165 in file "LabLCDisp.c"
  Parameters:    Size  Location     Type
   datac           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -1408,7 +1408,7 @@ Total ram usage:        0 bytes
 
  *************** function _ISR *****************
  Defined at:
-		line 83 in file "LabLCDisp.c"
+		line 85 in file "LabLCDisp.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type

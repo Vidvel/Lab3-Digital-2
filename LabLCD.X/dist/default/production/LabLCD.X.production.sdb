@@ -25,15 +25,15 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"83 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+"85 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
 [v _ISR ISR `II(v  1 e 1 0 ]
-"107
+"109
 [v _main main `(v  1 e 1 0 ]
-"163
+"165
 [v _cntdisp cntdisp `(v  1 e 1 0 ]
-"271
+"273
 [v _dispval1 dispval1 `(v  1 e 1 0 ]
-"393
+"395
 [v _dispval2 dispval2 `(v  1 e 1 0 ]
 "20 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LCDISPLIBLB3.c
 [v _lcd_databits lcd_databits `(v  1 e 1 0 ]
@@ -226,26 +226,26 @@
 [v _TRMT TRMT `VEb  1 e 0 @1217 ]
 "4538
 [v _TXEN TXEN `VEb  1 e 0 @1221 ]
-"72 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+"74 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
 [v _ADCval1 ADCval1 `uc  1 e 1 0 ]
-"73
-[v _ADCval2 ADCval2 `uc  1 e 1 0 ]
-"74
-[v _ADCchannel ADCchannel `uc  1 e 1 0 ]
 "75
-[v _send send `uc  1 e 1 0 ]
+[v _ADCval2 ADCval2 `uc  1 e 1 0 ]
 "76
-[v _contador contador `uc  1 e 1 0 ]
+[v _ADCchannel ADCchannel `uc  1 e 1 0 ]
 "77
+[v _send send `uc  1 e 1 0 ]
+"78
+[v _contador contador `uc  1 e 1 0 ]
+"79
 [v _recived recived `uc  1 e 1 0 ]
-"107
+"109
 [v _main main `(v  1 e 1 0 ]
 {
-"119
+"121
 [v main@valf2 valf2 `f  1 a 4 65 ]
-"118
+"120
 [v main@valf1 valf1 `f  1 a 4 61 ]
-"161
+"163
 } 0
 "12 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\usartlib.c
 [v _usart_setup usart_setup `(v  1 e 1 0 ]
@@ -281,35 +281,35 @@
 [v initADC@var1 var1 `uc  1 a 1 0 ]
 "68
 } 0
-"393 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+"395 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
 [v _dispval2 dispval2 `(v  1 e 1 0 ]
 {
-"394
-[v dispval2@vals vals `i  1 a 2 55 ]
-"397
-[v dispval2@ent ent `i  1 a 2 53 ]
 "396
+[v dispval2@vals vals `i  1 a 2 55 ]
+"399
+[v dispval2@ent ent `i  1 a 2 53 ]
+"398
 [v dispval2@dec1 dec1 `i  1 a 2 51 ]
-"395
+"397
 [v dispval2@dec2 dec2 `i  1 a 2 49 ]
-"393
+"395
 [v dispval2@dataf dataf `f  1 p 4 44 ]
-"513
+"515
 } 0
-"271
+"273
 [v _dispval1 dispval1 `(v  1 e 1 0 ]
 {
-"272
-[v dispval1@vals vals `i  1 a 2 54 ]
-"275
-[v dispval1@ent ent `i  1 a 2 52 ]
 "274
+[v dispval1@vals vals `i  1 a 2 54 ]
+"277
+[v dispval1@ent ent `i  1 a 2 52 ]
+"276
 [v dispval1@dec1 dec1 `i  1 a 2 50 ]
-"273
+"275
 [v dispval1@dec2 dec2 `i  1 a 2 48 ]
-"271
+"273
 [v dispval1@dataf dataf `f  1 p 4 44 ]
-"391
+"393
 } 0
 "43 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\fltol.c
 [v ___fltol __fltol `(l  1 e 4 0 ]
@@ -360,23 +360,23 @@
 [v __Umul8_16@multiplier multiplier `uc  1 a 1 6 ]
 "60
 } 0
-"163 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+"165 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
 [v _cntdisp cntdisp `(v  1 e 1 0 ]
 {
 [v cntdisp@datac datac `uc  1 a 1 wreg ]
-"164
-[v cntdisp@vals vals `i  1 a 2 17 ]
-"167
-[v cntdisp@ent3 ent3 `i  1 a 2 14 ]
 "166
-[v cntdisp@ent2 ent2 `i  1 a 2 12 ]
-"165
-[v cntdisp@ent1 ent1 `i  1 a 2 10 ]
-"163
-[v cntdisp@datac datac `uc  1 a 1 wreg ]
+[v cntdisp@vals vals `i  1 a 2 17 ]
+"169
+[v cntdisp@ent3 ent3 `i  1 a 2 14 ]
 "168
+[v cntdisp@ent2 ent2 `i  1 a 2 12 ]
+"167
+[v cntdisp@ent1 ent1 `i  1 a 2 10 ]
+"165
+[v cntdisp@datac datac `uc  1 a 1 wreg ]
+"170
 [v cntdisp@datac datac `uc  1 a 1 16 ]
-"269
+"271
 } 0
 "151 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LCDISPLIBLB3.c
 [v _lcd_wstring lcd_wstring `(v  1 e 1 0 ]
@@ -507,8 +507,8 @@
 {
 "54
 } 0
-"83 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
+"85 C:\ProyectosDigitali2\Laboratorio3\Lab3-Digital-2\LabLCD.X\LabLCDisp.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"105
+"107
 } 0

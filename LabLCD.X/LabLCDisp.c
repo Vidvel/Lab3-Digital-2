@@ -35,6 +35,8 @@ Fosc de 4MHz, SYNC = 0, BRGH = 1 y BRH16 = 0 da BOUDR de 9615 (0.16%)
  * CREN = ?
  * 
  * BAUDCTL -> SCKP = 0
+ * Librería Para el USART extraída de:
+ * https://electrosome.com/uart-pic-microcontroller-mplab-xc8/
  * 
  */
 

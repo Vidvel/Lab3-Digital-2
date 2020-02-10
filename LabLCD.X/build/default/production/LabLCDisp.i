@@ -7,7 +7,7 @@
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "LabLCDisp.c" 2
-# 46 "LabLCDisp.c"
+# 48 "LabLCDisp.c"
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -2511,7 +2511,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 64 "LabLCDisp.c" 2
+# 66 "LabLCDisp.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
@@ -2646,7 +2646,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 65 "LabLCDisp.c" 2
+# 67 "LabLCDisp.c" 2
 
 # 1 "./LCDISPLIBLB3.h" 1
 # 11 "./LCDISPLIBLB3.h"
@@ -2664,7 +2664,7 @@ void lcd_writechar(char m);
 void lcd_char(char iord);
 void lcd_wstring(char *a);
 void lcd_clear(void);
-# 66 "LabLCDisp.c" 2
+# 68 "LabLCDisp.c" 2
 
 # 1 "./adclib.h" 1
 # 11 "./adclib.h"
@@ -2672,7 +2672,7 @@ void lcd_clear(void);
 # 11 "./adclib.h" 2
 
 void initADC(char var1);
-# 67 "LabLCDisp.c" 2
+# 69 "LabLCDisp.c" 2
 
 # 1 "./usartlib.h" 1
 # 10 "./usartlib.h"
@@ -2680,7 +2680,7 @@ void usart_setup(void);
 void UART_Write(char data);
 char UART_Read(void);
 char UART_Data_Ready(void);
-# 68 "LabLCDisp.c" 2
+# 70 "LabLCDisp.c" 2
 
 
 
